@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +71,38 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $typeutilisateur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CodePostal::class, mappedBy="utilisateur")
+     */
+    private $adressecp;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Localite::class, mappedBy="utilisateur")
+     */
+    private $adresselocalite;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commune::class, mappedBy="utilisateur")
+     */
+    private $adressecommune;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Internaute::class, cascade={"persist", "remove"})
+     */
+    private $profil;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Prestataire::class, mappedBy="profil", cascade={"persist", "remove"})
+     */
+    private $prestataire;
+
+    public function __construct()
+    {
+        $this->adressecp = new ArrayCollection();
+        $this->adresselocalite = new ArrayCollection();
+        $this->adressecommune = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -239,6 +273,130 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTypeutilisateur(string $typeutilisateur): self
     {
         $this->typeutilisateur = $typeutilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CodePostal>
+     */
+    public function getAdressecp(): Collection
+    {
+        return $this->adressecp;
+    }
+
+    public function addAdressecp(CodePostal $adressecp): self
+    {
+        if (!$this->adressecp->contains($adressecp)) {
+            $this->adressecp[] = $adressecp;
+            $adressecp->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdressecp(CodePostal $adressecp): self
+    {
+        if ($this->adressecp->removeElement($adressecp)) {
+            // set the owning side to null (unless already changed)
+            if ($adressecp->getUtilisateur() === $this) {
+                $adressecp->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Localite>
+     */
+    public function getAdresselocalite(): Collection
+    {
+        return $this->adresselocalite;
+    }
+
+    public function addAdresselocalite(Localite $adresselocalite): self
+    {
+        if (!$this->adresselocalite->contains($adresselocalite)) {
+            $this->adresselocalite[] = $adresselocalite;
+            $adresselocalite->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresselocalite(Localite $adresselocalite): self
+    {
+        if ($this->adresselocalite->removeElement($adresselocalite)) {
+            // set the owning side to null (unless already changed)
+            if ($adresselocalite->getUtilisateur() === $this) {
+                $adresselocalite->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commune>
+     */
+    public function getAdressecommune(): Collection
+    {
+        return $this->adressecommune;
+    }
+
+    public function addAdressecommune(Commune $adressecommune): self
+    {
+        if (!$this->adressecommune->contains($adressecommune)) {
+            $this->adressecommune[] = $adressecommune;
+            $adressecommune->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdressecommune(Commune $adressecommune): self
+    {
+        if ($this->adressecommune->removeElement($adressecommune)) {
+            // set the owning side to null (unless already changed)
+            if ($adressecommune->getUtilisateur() === $this) {
+                $adressecommune->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfil(): ?Internaute
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(?Internaute $profil): self
+    {
+        $this->profil = $profil;
+
+        return $this;
+    }
+
+    public function getPrestataire(): ?Prestataire
+    {
+        return $this->prestataire;
+    }
+
+    public function setPrestataire(?Prestataire $prestataire): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($prestataire === null && $this->prestataire !== null) {
+            $this->prestataire->setProfil(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($prestataire !== null && $prestataire->getProfil() !== $this) {
+            $prestataire->setProfil($this);
+        }
+
+        $this->prestataire = $prestataire;
 
         return $this;
     }
