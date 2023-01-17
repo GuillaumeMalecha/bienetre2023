@@ -27,9 +27,9 @@
             <div class="header dark-header nav-left-side">
                 <nav class="headnavbar">
                     <div class="nav-header">
-                        <a href="" class="brand normal-logo"><img src="{{ asset('assets/img/bienetre2023.png') }}"
+                        <a href="{{ path('home') }}" class="brand normal-logo"><img src="{{ asset('assets/img/bienetre2023.png') }}"
                                                                   alt=""/></a>
-                        <a href="" class="brand brand-overlay"><img src="{{ asset('assets/img/bienetre2023.png') }}"
+                        <a href="{{ path('home') }}" class="brand brand-overlay"><img src="{{ asset('assets/img/bienetre2023.png') }}"
                                                                     alt=""/></a>
                         <button class="toggle-bar"><span class="ti-align-justify"></span></button>
                     </div>
@@ -38,9 +38,7 @@
                         <li class="dropdown">
                             <a href="JavaScript:Void(0);" class="active">S'inscrire</a>
                             <ul class="dropdown-menu">
-                                <a href="" class="active">Je suis client</a>
-                                <a href="" class="active">Je suis professionnel</a>
-                                <a href="" class="active">Inscription générale</a>
+                                <a href="" class="active">Inscription</a>
                             </ul>
                         </li>
 
@@ -99,7 +97,7 @@
                         <li class="dropdown">
                             <a href="JavaScript:Void(0);">Contactez-nous</a>
                             <ul class="dropdown-menu">
-                                <a href="">Formulaire de contact</a>
+                                <a href="{{ path('contact') }}">Formulaire de contact</a>
 
                                 <li class="dropdown">
                                     <a href="JavaScript:Void(0);">Centres d'appels</a>
