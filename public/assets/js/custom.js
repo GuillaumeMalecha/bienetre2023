@@ -401,25 +401,25 @@ $(function() {
 	
 	// Select Category
 	$('#list-category').select2({
-		placeholder: "Choose Category",
+		placeholder: "Choisir une catégorie",
 		allowClear: true
 	});
 	
 	// Event Select Category
 	$('#event-list-category').select2({
-		placeholder: "Choose Category",
+		placeholder: "Choisir une catégorie",
 		allowClear: true
 	});
 	
 	// Select Rooms
 	$('#rooms').select2({
-		placeholder: "Choose Rooms",
+		placeholder: "Choisir le nombre de chambres",
 		allowClear: true
 	});
 	
 	// Select Cities
 	$('#choose-city').select2({
-		placeholder: "Select City",
+		placeholder: "Selectionnez une ville",
 		allowClear: true
 	});
 	
@@ -473,7 +473,7 @@ $(function() {
 				'<tr class="pricing-list-item pricing-submenu">' +
 				'<td>' +
 				'<div class="box-move"><i class="ti-move"></i></div>' +
-				'<div class="box-input"><input type="text" class="frm-control" placeholder="Category Title" /></div>' +
+				'<div class="box-input"><input type="text" class="frm-control" placeholder="Titre de la catégorie" /></div>' +
 				'<div class="box-close"><a class="delete" href="#"><i class="ti-close"></i></a></div>' +
 				'</td>' +
 				'</tr>');

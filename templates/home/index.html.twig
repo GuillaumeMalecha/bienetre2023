@@ -4,9 +4,76 @@
 
 {% block body %}
 
-<i class="container justify-content-center">
-    <img src="{{ asset('assets/img/bigbienetre2023.png') }}" alt="Grand logo du site bien-être"/>
-<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque deserunt ea eius, ex exercitationem facere ipsum labore laborum minima molestias nostrum obcaecati, omnis praesentium ratione ullam vitae voluptatibus.</h3>
-</i>
+    <!-- ============================ Bandeau de Recherche ================================== -->
+    <div class="image-cover hero-banner" style="background:url(/assets/img/bienetre2023logo.gif) no-repeat;"
+         data-overlay="7">
+        <div class="container">
+
+            <h1 class="big-header-capt">Trouvez votre Bien-Être</h1>
+            <div class="full-search-2 italian-search hero-search-radius">
+                <div class="hero-search-content">
+
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control b-r" placeholder="Mot clefs">
+                                    <i class="ti-search"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control b-r" placeholder="Localité">
+                                    <i class="ti-target"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 small-padd">
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <select id="list-category" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">Spa</option>
+                                        <option value="2">Restaurants</option>
+                                        <option value="3">Hotels</option>
+                                        <option value="4">Massage</option>
+                                        <option value="5">Bronzage</option>
+                                        <option value="6">Thalasso</option>
+                                        <option value="7">Hammam</option>
+                                    </select>
+                                    <i class="ti-list"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-12 small-padd">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <a href="#" class="btn search-btn">Recherche</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ============================ Fin de la recherche ================================== -->
+
+    <i class="container justify-content-center">
+        <img src="{{ asset('assets/img/bigbienetre2023.png') }}" alt="Grand logo du site bien-être"/>
+        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque deserunt ea eius, ex
+            exercitationem facere ipsum labore laborum minima molestias nostrum obcaecati, omnis praesentium ratione
+            ullam vitae voluptatibus.</h3>
+    </i>
 
 {% endblock %}
