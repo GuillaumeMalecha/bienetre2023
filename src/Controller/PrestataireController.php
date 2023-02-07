@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Prestataire;
+use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
 use App\Repository\PrestataireRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,25 +11,49 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormTypeInterface;
+use Doctrine\DBAL\Types\TextType;
+
 
 class PrestataireController extends AbstractController
 {
     /**
-     * @Route("/prestataire", name="prestataire")
+     * @Route("/prestataires", name="tousprestataires")
      */
-    public function index(PrestataireRepository $prestataire, CategorieServicesRepository $categorieServices)
+    public function tousprestataires(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('prestataire/liste.html.twig', [
-            'prestataires' => $prestataire->findAllData(),
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $listePrestataires = $repository->findAll();
+
+        if (!$listePrestataires){
+            return $this->redirectToRoute('ajoutprestataire');
+        }
+
+        return $this->render('prestataire/index.html.twig', [
+            'prestataires' => $listePrestataires,
         ]);
     }
 
+
     /**
-     * @Route("/prestataire", name="ajoutprestataire")
+     * @Route("/ajoutprestataire", name="ajoutprestataire")
      */
     public function ajoutprestataire(Request $request, EntityManagerInterface $entityManager): Response
     {
         $prestataire = new Prestataire();
+        $form = $this->createForm(PrestataireType::class, $prestataire);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()){
+            $prestataire = $form->getData();
+            $entityManager->persist($prestataire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('tousprestataires');
+        }
+
+        return $this->renderForm('prestataire/ajouter.html.twig', [
+            'form' =>$form
+        ]);
     }
 }
