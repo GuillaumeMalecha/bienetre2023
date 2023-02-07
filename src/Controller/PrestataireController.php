@@ -25,7 +25,7 @@ class PrestataireController extends AbstractController
         $repository = $entityManager->getRepository(Prestataire::class);
         $listePrestataires = $repository->findAll();
 
-        if (!$listePrestataires){
+        if (!$listePrestataires) {
             return $this->redirectToRoute('ajoutprestataire');
         }
 
@@ -44,7 +44,7 @@ class PrestataireController extends AbstractController
         $form = $this->createForm(PrestataireType::class, $prestataire);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $prestataire = $form->getData();
             $entityManager->persist($prestataire);
             $entityManager->flush();
@@ -53,7 +53,21 @@ class PrestataireController extends AbstractController
         }
 
         return $this->renderForm('prestataire/ajouter.html.twig', [
-            'form' =>$form
+            'form' => $form
+        ]);
+    }
+
+    /**
+     * @Route("/detailprestataire/{id}", name="detailprestataire")
+     */
+
+    public function detailprestataire($id, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataire = $repository->find($id);
+
+        return $this->render('prestataire/detail.html.twig', [
+            'prestataire' => $prestataire
         ]);
     }
 }

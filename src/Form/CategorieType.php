@@ -2,34 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Prestataire;
+use App\Entity\CategorieServices;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\FormTypeInterface;
 
-
-class PrestataireType extends AbstractType
+class CategorieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('emailcontact', EmailType::class)
+            ->add('description', TextareaType::class)
+            ->add('enavant', BooleanType::class)
             ->add('nom', TextType::class)
-            ->add('numtel', TextType::class)
-            ->add('numtva', TextType::class)
-            ->add('siteinternet', TextType::class)
+            ->add('valide', BooleanType::class)
             //->add('images')
-            //->add('profil')
-            //->add('photo')
-            //->add('proposer')
-            //->add('organiser')
-            //->add('offrir')
-            //->add('favori')
-            //->add('concerner')
+            //->add('prestataires')
+            //->add('promotion')
             ->add('Enregistrer', SubmitType::class)
         ;
     }
@@ -37,7 +30,7 @@ class PrestataireType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Prestataire::class,
+            'data_class' => CategorieServices::class,
         ]);
     }
 }
