@@ -10,8 +10,12 @@
         <ul>
             {% for prestataire in prestataires %}
                 <i class="fas fa-bookmark"></i>
-                <h4>Titre : <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}"><button type="button" class="btn btn-primary">{{ prestataire.nom }}</button></a></h4>
-                <h5>Nom : {{ prestataire.nom }}</h5>
+                <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
+                <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }} - {{ prestataire.siteinternet }}</p>
+                <p>Numéro de TVA : {{ prestataire.numtva }} </p>
+                <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}"><button type="button" class="btn btn-secondary">En savoir plus</button></a>
+
+                <br>
                 <br>
 
             {% endfor %}

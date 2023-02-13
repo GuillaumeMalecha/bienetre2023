@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\CategorieServices;
 use App\Entity\Prestataire;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,7 +27,11 @@ class PrestataireType extends AbstractType
             //->add('images')
             //->add('profil')
             //->add('photo')
-            //->add('proposer')
+            ->add('proposer', EntityType::class, [
+                'class' => CategorieServices::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true])
             //->add('organiser')
             //->add('offrir')
             //->add('favori')

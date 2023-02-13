@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les catégories de service !{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2>Toutes les catégories de service</h2>
+        <ul>
+            {% for categorie in categories %}
+                <i class="fas fa-bookmark"></i>
+                <h3>Nom de la catégorie : {{ categorie.nom }}</h3>
+                <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                    <button type="button" class="btn btn-secondary">En savoir plus</button>
+                </a>
+                <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                    <button type="button" class="btn btn-secondary">{{ categorie.nom }}</button>
+                </a>
+
+                <br>
+                <br>
+
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

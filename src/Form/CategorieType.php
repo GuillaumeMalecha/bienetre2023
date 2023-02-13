@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\CategorieServices;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,10 +15,10 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('description', TextareaType::class)
-            ->add('enavant', BooleanType::class)
             ->add('nom', TextType::class)
-            ->add('valide', BooleanType::class)
+            ->add('description', TextareaType::class)
+            //->add('enavant')
+            //->add('valide')
             //->add('images')
             //->add('prestataires')
             //->add('promotion')

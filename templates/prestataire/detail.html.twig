@@ -6,6 +6,9 @@
 
 
     <!-- ============================ Hero Banner  Start================================== -->
+    <!-- ============================ Début du slider de photos ============================ -->
+
+
     <div class="featured-slick">
         <div class="featured-slick-slide">
             <div><a href="https://picsum.photos/1200/850" class="mfp-gallery"><img
@@ -16,8 +19,16 @@
                             src="https://picsum.photos/1200/851" class="img-fluid mx-auto" alt=""/></a></div>
             <div><a href="https://picsum.photos/1200/853" class="mfp-gallery"><img
                             src="https://picsum.photos/1200/853" class="img-fluid mx-auto" alt=""/></a></div>
+            <div><a href="https://picsum.photos/1200/854" class="mfp-gallery"><img
+                            src="https://picsum.photos/1200/854" class="img-fluid mx-auto" alt=""/></a></div>
+            <div><a href="https://picsum.photos/1200/855" class="mfp-gallery"><img
+                            src="https://picsum.photos/1200/855" class="img-fluid mx-auto" alt=""/></a></div>
         </div>
     </div>
+
+
+    <!-- ============================ Fin du slider de photos =============================== -->
+
 
     <section class="spd-wrap">
         <div class="container">
@@ -29,8 +40,9 @@
 
                         <div class="slide-property-first">
                             <div class="listname-into">
-                                <h2>{{ prestataire.nom }} <span class="prt-type rent">Catégorie à afficher</span></h2>
-                                <span><i class="lni-map-marker"></i> Adresse à afficher</span>
+                                
+                                <h2>{{ prestataire.nom }} {% for categorie in prestataire.proposer %}<span class="prt-type rent">{{ categorie.nom }}</span> {% endfor %}</h2>
+                                <span><i class="lni-map-marker"></i>Adresse à afficher</span>
                             </div>
                         </div>
 
@@ -41,7 +53,7 @@
             </div>
         </div>
     </section>
-    <!-- ============================ Hero Banner End ================================== -->
+
 
 
     <h5>Nom : {{ prestataire.nom }}</h5>
