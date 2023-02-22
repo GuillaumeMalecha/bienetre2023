@@ -28,6 +28,9 @@ security:
                 target: app_login
             custom_authenticator: App\Security\LoginFormAuthenticator
             entry_point: form_login
+            remember_me:
+                secret: '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
 
 
             # activate different ways to authenticate
