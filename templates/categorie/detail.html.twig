@@ -28,4 +28,16 @@
     </div>
 </section>
 
+    <div class="container">
+        <div class="row">
+
+            <a href="{{ path('modifiercategorie', {id: categorie.id}) }}">
+                <button type="button" class="btn btn-info">Modifier la catégorie</button>
+            </a>
+            <a href="{{ path('supprimercategorie', {id: categorie.id}) }}">
+                <button type="button" class="btn btn-danger">Supprimer la catégorie</button>
+            </a>
+
+        </div>
+    </div>
 {% endblock %}

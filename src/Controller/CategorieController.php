@@ -21,7 +21,7 @@ class CategorieController extends AbstractController
         $repository = $entityManager->getRepository(CategorieServices::class);
         $listeCategories = $repository->findAll();
 
-        if (!$listeCategories){
+        if (!$listeCategories) {
             return $this->redirectToRoute('ajoutcategorie');
         }
 
@@ -29,7 +29,6 @@ class CategorieController extends AbstractController
             'categories' => $listeCategories,
         ]);
     }
-
 
 
     /**
@@ -67,6 +66,44 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/detail.html.twig', [
             'categorie' => $categorie
+        ]);
+    }
+
+    /**
+     * @Route("/detailcategorie/{id}/supprimer", name="supprimercategorie")
+     */
+
+    public function supprimercategorie(int $id, EntityManagerInterface $entityManager)
+    {
+        $repository = $entityManager->getRepository(CategorieServices::class);
+        $categorie = $repository->find($id);
+        $entityManager->remove($categorie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('toutescategories');
+    }
+
+    /**
+     * @Route("/detailcategorie/{id}/modifier", name="modifiercategorie")
+     */
+
+    public function modifiercategorie(int $id, EntityManagerInterface $entityManager, Request $request)
+    {
+        $repository = $entityManager->getRepository(CategorieServices::class);
+        $categorie = $repository->find($id);
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorie = $form->getData();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('toutescategories');
+            }
+
+        return $this->renderForm('categorie/modifier.html.twig', [
+            'form' => $form,
+            'categorie' => $categorie,
         ]);
     }
 }

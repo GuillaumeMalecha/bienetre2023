@@ -10,13 +10,13 @@
         <ul>
             {% for categorie in categories %}
                 <i class="fas fa-bookmark"></i>
-                <h3>Nom de la catégorie : {{ categorie.nom }}</h3>
+                <h3>Catégorie de service : {{ categorie.nom }}</h3>
                 <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
                     <button type="button" class="btn btn-secondary">En savoir plus</button>
                 </a>
-                <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                {# <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
                     <button type="button" class="btn btn-secondary">{{ categorie.nom }}</button>
-                </a>
+                </a> #}
 
                 <br>
                 <br>

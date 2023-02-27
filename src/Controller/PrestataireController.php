@@ -70,4 +70,41 @@ class PrestataireController extends AbstractController
             'prestataire' => $prestataire
         ]);
     }
+
+    /**
+     * @Route("/detailprestataire/{id}/supprimer", name="supprimerprestataire")
+     */
+
+    public function supprimerprestataire(int $id, EntityManagerInterface $entityManager)
+    {
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataire = $repository->find($id);
+        $entityManager->remove($prestataire);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('tousprestataires');
+    }
+
+    /**
+     * @Route("/detailprestataire/{id}/modifier", name="modifierprestataire")
+     */
+
+    public function modifierprestataire(int $id, EntityManagerInterface $entityManager, Request $request)
+    {
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataire = $repository->find($id);
+        $form = $this->createForm(PrestataireType::class, $prestataire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $prestataire = $form->getData();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('tousprestataires');
+        }
+        return  $this->renderForm('prestataire/modifier.html.twig', [
+            'form'=>$form,
+            'prestataire'=>$prestataire
+        ]);
+    }
 }

@@ -41,11 +41,11 @@
                         <div class="slide-property-first">
                             <div class="listname-into">
 
-                                <h2>{{ prestataire.nom }} {% for categorie in prestataire.proposer %}<span class="prt-type rent">{{ categorie.nom }}</span> {% endfor %}</h2>
+                                <h2>{{ prestataire.nom }} {% for categorie in prestataire.proposer %}<span
+                                            class="prt-type rent">{{ categorie.nom }}</span> {% endfor %}</h2>
                                 <span><i class="lni-map-marker"></i>Adresse à afficher</span>
                             </div>
                         </div>
-
 
                     </div>
 
@@ -54,8 +54,17 @@
         </div>
     </section>
 
+    <div class="container">
+        <div class="row">
 
-
-    <h5>Nom : {{ prestataire.nom }}</h5>
+            <a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
+                <button type="button" class="btn btn-info">Modifier le prestataire</button>
+            </a>
+            <a href="{{ path('supprimerprestataire', {id: prestataire.id}) }}">
+                <button type="button" class="btn btn-danger">Supprimer le prestataire</button>
+            </a>
+            <h5>Nom : {{ prestataire.nom }}</h5>
+        </div>
+    </div>
 {% endblock %}
 
