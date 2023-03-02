@@ -6,10 +6,16 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
+            <ul class="col-lg-8 col-md-10">
                 <h2>Modifier la catégorie de service : {{ categorie.nom }}</h2>
 
                 {{ form_start(form) }}
+
+                {{ form_row(form.nom) }}
+
+                {{ form_row(form.description) }}
+
+                {{ form_widget(form.enavant) }}
 
                 {{ form_end(form) }}
 

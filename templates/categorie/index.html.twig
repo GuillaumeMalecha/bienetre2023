@@ -3,26 +3,49 @@
 {% block title %}Toutes les catégories de service !{% endblock %}
 
 {% block body %}
-
+    <br>
     <div class="container">
-
+        <br>
         <h2>Toutes les catégories de service</h2>
-        <ul>
-            {% for categorie in categories %}
-                <i class="fas fa-bookmark"></i>
-                <h3>Catégorie de service : {{ categorie.nom }}</h3>
-                <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                    <button type="button" class="btn btn-secondary">En savoir plus</button>
-                </a>
-                {# <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+
+        <div class="row justify-content-center">
+            <ul class="col-lg-8 col-md-10">
+                <br>
+                {% for categorie in categories %}
+
+                    {% if categorie.enavant == true %}
+
+                        <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
+                        <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
+                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                            <button type="button" class="btn btn-primary">En savoir plus</button>
+                        </a>
+                        <br>
+                        <br>
+
+                    {% endif %}
+                {% endfor %}
+
+                {% for categorie in categories %}
+
+                    {% if categorie.enavant == false %}
+
+                        <i class="fas fa-bookmark"></i>
+                        <h4>Catégorie de service : {{ categorie.nom }}</h4>
+                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                            <button type="button" class="btn btn-secondary">En savoir plus</button>
+                        </a>
+                        {# <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
                     <button type="button" class="btn btn-secondary">{{ categorie.nom }}</button>
                 </a> #}
 
-                <br>
-                <br>
+                        <br>
+                        <br>
+                    {% endif %}
 
-            {% endfor %}
-        </ul>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
 {% endblock %}
