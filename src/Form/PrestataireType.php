@@ -19,16 +19,27 @@ class PrestataireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('emailcontact', EmailType::class)
-            ->add('nom', TextType::class)
-            ->add('numtel', TextType::class)
-            ->add('numtva', TextType::class)
-            ->add('siteinternet', TextType::class)
+            ->add('emailcontact', EmailType::class, [
+                'label' => 'Email de contact',
+            ])
+            ->add('nom', TextType::class, [
+                'label' => 'Nom du prestataire',
+            ])
+            ->add('numtel', TextType::class, [
+                'label' => 'Numéro de téléphone',
+            ])
+            ->add('numtva', TextType::class, [
+                'label' => 'Numéro de TVA',
+            ])
+            ->add('siteinternet', TextType::class, [
+                'label' => 'Site web',
+            ])
             //->add('images')
             //->add('profil')
             //->add('photo')
             ->add('proposer', EntityType::class, [
                 'class' => CategorieServices::class,
+                'label'    => 'Catégorie de service',
                 'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true])

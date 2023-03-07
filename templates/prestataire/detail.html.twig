@@ -5,66 +5,191 @@
 {% block body %}
 
 
-    <!-- ============================ Hero Banner  Start================================== -->
-    <!-- ============================ Début du slider de photos ============================ -->
+<!-- ============================ Hero Banner  Start================================== -->
+<!-- ============================ Début du slider de photos ============================ -->
 
 
-    <div class="featured-slick">
-        <div class="featured-slick-slide">
-            <div><a href="https://picsum.photos/1200/850" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/850" class="img-fluid mx-auto" alt=""/></a></div>
-            <div><a href="https://picsum.photos/1200/852" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/852" class="img-fluid mx-auto" alt=""/></a></div>
-            <div><a href="https://picsum.photos/1200/851" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/851" class="img-fluid mx-auto" alt=""/></a></div>
-            <div><a href="https://picsum.photos/1200/853" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/853" class="img-fluid mx-auto" alt=""/></a></div>
-            <div><a href="https://picsum.photos/1200/854" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/854" class="img-fluid mx-auto" alt=""/></a></div>
-            <div><a href="https://picsum.photos/1200/855" class="mfp-gallery"><img
-                            src="https://picsum.photos/1200/855" class="img-fluid mx-auto" alt=""/></a></div>
-        </div>
+<div class="featured-slick">
+    <div class="featured-slick-slide">
+        <div><a href="https://picsum.photos/1200/850" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/850" class="img-fluid mx-auto" alt=""/></a></div>
+        <div><a href="https://picsum.photos/1200/852" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/852" class="img-fluid mx-auto" alt=""/></a></div>
+        <div><a href="https://picsum.photos/1200/851" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/851" class="img-fluid mx-auto" alt=""/></a></div>
+        <div><a href="https://picsum.photos/1200/853" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/853" class="img-fluid mx-auto" alt=""/></a></div>
+        <div><a href="https://picsum.photos/1200/854" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/854" class="img-fluid mx-auto" alt=""/></a></div>
+        <div><a href="https://picsum.photos/1200/855" class="mfp-gallery"><img
+                        src="https://picsum.photos/1200/855" class="img-fluid mx-auto" alt=""/></a></div>
     </div>
+</div>
 
 
-    <!-- ============================ Fin du slider de photos =============================== -->
+<!-- ============================ Fin du slider de photos =============================== -->
 
 
-    <section class="spd-wrap">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-12 col-md-12">
-
-                    <div class="slide-property-detail">
-
-                        <div class="slide-property-first">
-                            <div class="listname-into">
-
-                                <h2>{{ prestataire.nom }} {% for categorie in prestataire.proposer %}<span
-                                            class="prt-type rent">{{ categorie.nom }}</span> {% endfor %}</h2>
-                                <span><i class="lni-map-marker"></i>Adresse à afficher</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
+<section class="spd-wrap">
     <div class="container">
         <div class="row">
 
-            <a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
-                <button type="button" class="btn btn-info">Modifier le prestataire</button>
-            </a>
-            <a href="{{ path('supprimerprestataire', {id: prestataire.id}) }}">
-                <button type="button" class="btn btn-danger">Supprimer le prestataire</button>
-            </a>
-            <h5>Nom : {{ prestataire.nom }}</h5>
+            <div class="col-lg-12 col-md-12">
+
+                <div class="slide-property-detail">
+
+                    <div class="slide-property-first">
+                        <div class="listname-into">
+
+                            <h2>{{ prestataire.nom }} {% for categorie in prestataire.proposer %}<span
+                                        class="prt-type rent">{{ categorie.nom }}</span> {% endfor %}</h2>
+                            <span><i class="lni-map-marker"></i>Adresse à afficher</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
-{% endblock %}
+</section>
+
+
+<section class="gray">
+    <div class="container">
+        <div class="row">
+
+            <!-- property main detail -->
+            <div class="col-lg-8 col-md-12 col-sm-12">
+
+                <!-- Single Block Wrap -->
+                <div class="block-wrap">
+
+                    <div class="block-header">
+                        <h4 class="block-title">Description de : {{ prestataire.nom }}</h4>
+                    </div>
+
+                    <div class="block-body">
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                            galley of type and scrambled it to make a type specimen book.</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                            galley of type and scrambled it to make a type specimen book.</p>
+                    </div>
+                </div>
+
+
+                <div class="block-wrap">
+                    {% for categorie in prestataire.proposer %}
+
+                <div class="block-header">
+                        <h4 class="block-title"> {{ categorie.nom }}</h4>
+                    </div>
+                    <div class="block-body">
+                        <p>{{ categorie.description }}
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+                <a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
+                    <button type="button" class="btn btn-info">Modifier le prestataire</button>
+                </a>
+                <a href="{{ path('supprimerprestataire', {id: prestataire.id}) }}">
+                    <button type="button" class="btn btn-danger">Supprimer le prestataire</button>
+                </a>
+            </div>
+
+            <!-- Listing Sidebar -->
+            <div class="col-lg-4 col-md-12 col-sm-12">
+
+
+
+                <div class="verified-list mb-4">
+                    <i class="ti-check"></i>Prestataire vérifié
+                </div>
+
+                <div class="tr-single-box">
+                    <div class="tr-single-header">
+                        <h4><i class="ti-direction"></i>Informations : {{ prestataire.nom }}</h4>
+                    </div>
+
+                    <div class="tr-single-body">
+                        <ul class="extra-service">
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <a href="#">
+                                        <div class="icon-box-round">
+                                            <i class="lni-map-marker"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            Adresse à afficher
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <a href="#">
+                                        <div class="icon-box-round">
+                                            <i class="lni-phone-handset"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            {{ prestataire.numtel }}
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <a href="#">
+                                        <div class="icon-box-round">
+                                            <i class="lni-envelope"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            {{ prestataire.emailcontact }}
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <a href="#">
+                                        <div class="icon-box-round">
+                                            <i class="lni-world"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            {{ prestataire.siteinternet }}
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="icon-box-icon-block">
+                                    <a href="#">
+                                        <div class="icon-box-round">
+                                            <i class="lni-user"></i>
+                                        </div>
+                                        <div class="icon-box-text">
+                                            TVA : BE{{ prestataire.numtva }}
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+                    {% endblock %}
 
