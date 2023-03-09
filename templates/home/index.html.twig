@@ -166,11 +166,47 @@
 
     <!-- ============================ Début  ============================ -->
 
-    <i class="container justify-content-center">
-        <img src="{{ asset('assets/img/bigbienetre2023.png') }}" alt="Grand logo du site bien-être"/>
-        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto atque deserunt ea eius, ex
-            exercitationem facere ipsum labore laborum minima molestias nostrum obcaecati, omnis praesentium ratione
-            ullam vitae voluptatibus.</h3>
-    </i>
+<div class="container">
+    <div class="row justify-content-center">
+        <ul class="col-lg-8 col-md-10">
+            <br>
+            {% for categorie in categories %}
+
+                {% if categorie.enavant == true %}
+
+                    <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
+                    <h2>Catégorie mise en avant : {{ categorie.nom }}</h2>
+                    <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                        <button type="button" class="btn btn-warning">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+
+  {#   <div class="container">
+        <div class="row justify-content-center">
+            <ul class="col-lg-8 col-md-10">
+                <br>
+                {% for prestataire in prestataires %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
+                    <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }} - {{ prestataire.siteinternet }}</p>
+                    <p>Numéro de TVA : {{ prestataire.numtva }} </p>
+                    <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}"><button type="button" class="btn btn-warning">En savoir plus</button></a>
+                    <br>
+                    <br>
+
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>#}
 
 {% endblock %}
