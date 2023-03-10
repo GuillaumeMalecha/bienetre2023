@@ -40,10 +40,13 @@ class HomeController extends AbstractController
      * @Route("/recherche", name="recherche")
      */
 
-    public function recherche(EntityManagerInterface $entityManager): Response
+    public function recherche(EntityManagerInterface $entityManager, Request $request): Response
     {
         $repository = $entityManager->getRepository(CategorieServices::class);
         $listeCategories = $repository->findAll();
+
+        //dd($request->request->all());
+
 
         return $this->render('home/recherche.html.twig', [
             'categories' => $listeCategories,

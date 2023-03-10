@@ -11,12 +11,14 @@
                 <div class="loving-modern-login">
                 <h2>{{ categorie.nom }} </h2>
                 <p>Description : {{ categorie.description }}</p>
+                    {% if is_granted('ROLE_ADMIN') == true %}
                 <a href="{{ path('modifiercategorie', {id: categorie.id}) }}">
                     <button type="button" class="btn btn-info">Modifier la catégorie</button>
                 </a>
                 <a href="{{ path('supprimercategorie', {id: categorie.id}) }}">
                     <button type="button" class="btn btn-danger">Supprimer la catégorie</button>
                 </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

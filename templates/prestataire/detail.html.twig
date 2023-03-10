@@ -93,12 +93,14 @@
 
 
                 </div>
+                    {% if is_granted('ROLE_ADMIN') == true %}
                 <a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
                     <button type="button" class="btn btn-info">Modifier le prestataire</button>
                 </a>
                 <a href="{{ path('supprimerprestataire', {id: prestataire.id}) }}">
                     <button type="button" class="btn btn-danger">Supprimer le prestataire</button>
                 </a>
+                    {% endif %}
             </div>
 
             <!-- Listing Sidebar -->

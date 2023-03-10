@@ -7,6 +7,7 @@ use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
 use App\Repository\PrestataireRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,7 @@ class PrestataireController extends AbstractController
 
     /**
      * @Route("/ajoutprestataire", name="ajoutprestataire")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function ajoutprestataire(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -73,6 +75,7 @@ class PrestataireController extends AbstractController
 
     /**
      * @Route("/detailprestataire/{id}/supprimer", name="supprimerprestataire")
+     * @IsGranted("ROLE_ADMIN")
      */
 
     public function supprimerprestataire(int $id, EntityManagerInterface $entityManager)
@@ -87,6 +90,7 @@ class PrestataireController extends AbstractController
 
     /**
      * @Route("/detailprestataire/{id}/modifier", name="modifierprestataire")
+     * @IsGranted("ROLE_ADMIN")
      */
 
     public function modifierprestataire(int $id, EntityManagerInterface $entityManager, Request $request)

@@ -7,17 +7,15 @@
     <div class="image-cover search-header-banner" style="background:url(https://picsum.photos/1920/1000) no-repeat;"
          data-overlay="6">
         <div class="container">
-            <div class="hero-search">
+            <h1 class="big-header-capt">Résultats de la recherche</h1>
 
-                <h1 class="big-header-capt">Résultats de votre recherche</h1>
-            </div>
             <div class="full-search-2 italian-search hero-search-radius box-style mb-4">
                 <div class="hero-search-content">
-                    <div class="row">
+                    <form class="row" method="POST" action="{{ path('recherche') }}">
                         <div class="col-lg-4 col-md-4 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <input type="text" class="form-control b-r" placeholder="Mot clefs">
+                                    <input type="text" name="nom" class="form-control b-r" placeholder="Mot clefs">
                                     <i class="theme-cl ti-search"></i>
                                 </div>
                             </div>
@@ -26,7 +24,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <input type="text" class="form-control b-r" placeholder="Localité">
+                                    <input type="text" name="localite" class="form-control b-r" placeholder="Localité">
                                     <i class="theme-cl ti-target"></i>
                                 </div>
                             </div>
@@ -35,7 +33,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-6 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <select id="list-category" class="form-control">
+                                    <select id="list-category" name="categorie" class="form-control">
                                         <option value="">&nbsp;</option>
                                         {% for categorie in categories %}
                                             <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
@@ -49,11 +47,11 @@
                         <div class="col-lg-2 col-md-2 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <a href="#" class="btn search-btn">Recherche</a>
+                                    <button type="submit" class="btn search-btn">Recherche</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

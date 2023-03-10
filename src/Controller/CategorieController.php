@@ -6,6 +6,7 @@ use App\Entity\CategorieServices;
 use App\Form\CategorieType;
 use App\Repository\CategorieServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,7 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/ajoutcategorie", name="ajoutcategorie")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function ajoutcategorie(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -71,6 +73,7 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/detailcategorie/{id}/supprimer", name="supprimercategorie")
+     * @IsGranted("ROLE_ADMIN")
      */
 
     public function supprimercategorie(int $id, EntityManagerInterface $entityManager)
@@ -85,6 +88,7 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/detailcategorie/{id}/modifier", name="modifiercategorie")
+     * @IsGranted("ROLE_ADMIN")
      */
 
     public function modifiercategorie(int $id, EntityManagerInterface $entityManager, Request $request)
