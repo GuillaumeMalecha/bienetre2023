@@ -47,9 +47,23 @@ class HomeController extends AbstractController
 
         //dd($request->request->all());
 
+        $formData = $request->request->all();
+
+        $nom = $formData['nom'];
+
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $recherche = $entityManager->createQueryBuilder()
+            ->select('e')
+            ->from(Prestataire::class, 'e')
+            ->where('e.nom LIKE :nom')
+            ->setParameter('nom', '%'.$nom.'%')
+            ->getQuery()
+            ->getResult();
 
         return $this->render('home/recherche.html.twig', [
             'categories' => $listeCategories,
+            'recherche' => $recherche,
+            'noms' => $nom,
         ]);
     }
 }

@@ -4,18 +4,20 @@
 
 {% block body %}
 
+    <!-- ============================ Bandeau de Recherche ================================== -->
+
     <div class="image-cover search-header-banner" style="background:url(https://picsum.photos/1920/1000) no-repeat;"
          data-overlay="6">
         <div class="container">
             <h1 class="big-header-capt">Résultats de la recherche</h1>
 
-            <div class="full-search-2 italian-search hero-search-radius box-style mb-4">
+             <div class="full-search-2 italian-search hero-search-radius box-style mb-4">
                 <div class="hero-search-content">
                     <form class="row" method="POST" action="{{ path('recherche') }}">
                         <div class="col-lg-4 col-md-4 col-sm-12 small-padd">
                             <div class="form-group">
                                 <div class="input-with-icon">
-                                    <input type="text" name="nom" class="form-control b-r" placeholder="Mot clefs">
+                                    <input type="text" name="nom" class="form-control b-r" placeholder="Nom du prestataire">
                                     <i class="theme-cl ti-search"></i>
                                 </div>
                             </div>
@@ -57,9 +59,32 @@
         </div>
     </div>
 
+    <!-- ============================ Fin de la recherche ================================== -->
 
 
+    <!-- ============================ Début des résultats ================================== -->
 
 
+    <div class="container">
+        <br>
+        <ul>
+            {% if noms is not empty %}
+                <h2>Résultats de la recherche : {{ noms }}</h2>
+                {% for prestataire in recherche %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
+
+                    <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}">
+                        <button type="button" class="btn btn-warning">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+
+                {% endfor %}
+            {% else %}
+                 <h2>Votre recherche n'a rien donné</h2>
+            {% endif %}
+        </ul>
+    </div>
 
 {% endblock %}
