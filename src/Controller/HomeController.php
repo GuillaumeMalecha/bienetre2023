@@ -22,16 +22,12 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(CategorieServices::class);
         $listeCategories = $repository->findAll();
 
-        //$repository = $entityManager->getRepository(Prestataire::class);
-        //$prestataires = $repository->find4last();
-
-        //$prestatairesrepository = $entityManager->getRepository(PrestataireRepository::class);
-        //$liste4Prestataires = $prestatairesrepository->findAll([], ['id' => 'DESC'], 4);
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $derniersPrestataires = $repository->findBy([], ['id' => 'DESC'], 4);
 
         return $this->render('home/index.html.twig', [
             'categories' => $listeCategories,
-            //'prestataires' => $prestataires
-            //'prestataires' => $liste4Prestataires,
+            'derniersPrestataires' => $derniersPrestataires,
         ]);
     }
 
@@ -49,21 +45,32 @@ class HomeController extends AbstractController
 
         $formData = $request->request->all();
 
-        $nom = $formData['nom'];
+        $nom = $formData['nom'] ?? null;
+        $categorieId = $formData['categorie'] ?? null;
+        $categorieServiceId = $formData['categorie_service'] ?? null;
 
         $repository = $entityManager->getRepository(Prestataire::class);
-        $recherche = $entityManager->createQueryBuilder()
+        $rechercheNom = $entityManager->createQueryBuilder()
             ->select('e')
             ->from(Prestataire::class, 'e')
             ->where('e.nom LIKE :nom')
-            ->setParameter('nom', '%'.$nom.'%')
-            ->getQuery()
+            ->setParameter('nom', '%'.$nom.'%');
+
+        $repository = $entityManager->getRepository(CategorieServices::class);
+        if ($categorieServiceId) {
+            $rechercheNom->innerJoin('e.categoriesServices', 'f')
+                ->andWhere('f.id = :id')
+                ->setParameter('id', $categorieServiceId);
+        }
+
+        $rechercheNom = $rechercheNom->getQuery()
             ->getResult();
 
         return $this->render('home/recherche.html.twig', [
             'categories' => $listeCategories,
-            'recherche' => $recherche,
+            'recherchenom' => $rechercheNom,
             'noms' => $nom,
+            'categorieserviceid' => $categorieServiceId,
         ]);
     }
 }
