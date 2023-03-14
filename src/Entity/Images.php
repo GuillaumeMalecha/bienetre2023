@@ -151,6 +151,9 @@ class Images
         if (!$this->prestataires->contains($prestataire)) {
             $this->prestataires[] = $prestataire;
             $prestataire->setPhoto($this);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($prestataire);
+            $entityManager->flush();
         }
 
         return $this;
@@ -166,5 +169,9 @@ class Images
         }
 
         return $this;
+    }
+
+    private function getDoctrine()
+    {
     }
 }

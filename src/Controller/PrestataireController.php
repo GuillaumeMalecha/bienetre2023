@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Prestataire;
 use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
@@ -42,12 +43,28 @@ class PrestataireController extends AbstractController
      */
     public function ajoutprestataire(Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $prestataire = new Prestataire();
         $form = $this->createForm(PrestataireType::class, $prestataire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $prestataire = $form->getData();
+
+            // Handle uploaded file
+            $imagesFile = $form->get('images')->getData();
+            if ($imagesFile) {
+                $images = new Images();
+                $fileName = md5(uniqid()) . '.' . $imagesFile->guessExtension();
+                $imagesFile->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
+                $images->setImage($fileName);
+                $prestataire->setImages($images);
+            } else {
+                $prestataire->setImages(null);
+            }
+
             $entityManager->persist($prestataire);
             $entityManager->flush();
 
@@ -101,6 +118,16 @@ class PrestataireController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $file = $form->get('images')->getData();
+
+            if ($file) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
+                $prestataire->setImages($fileName);
+            }
             $prestataire = $form->getData();
             $entityManager->flush();
 
