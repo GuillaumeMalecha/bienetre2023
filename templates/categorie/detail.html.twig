@@ -14,6 +14,10 @@
                 <div class="loving-modern-login">
                 <h2>{{ categorie.nom }} </h2>
                 <p>Description : {{ categorie.description }}</p>
+                    {% if categorie.images is defined and categorie.images.image is defined %}
+                    <img
+                            src="{{ asset('/pictures/'~categorie.images.image) }}" class="img-fluid mx-auto" alt=""/>
+                    {% endif %}
                     {% if is_granted('ROLE_ADMIN') == true %}
                 <a href="{{ path('modifiercategorie', {id: categorie.id}) }}">
                     <button type="button" class="btn btn-info">Modifier la catégorie</button>

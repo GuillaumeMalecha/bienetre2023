@@ -6,6 +6,7 @@ use App\Entity\CategorieServices;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -43,7 +44,14 @@ class CategorieType extends AbstractType
                 ],
             ])*/
             //->add('valide')
-            //->add('images')
+            ->add('image', FileType::class, [
+                'label' => 'Icone de la catégorie',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'accept' => 'image/*',
+                ],
+            ])
             //->add('prestataires')
             //->add('promotion')
             ->add('Enregistrer', SubmitType::class)

@@ -23,12 +23,28 @@
                 {% for categorie in categories %}
 
                     {% if categorie.enavant == true %}
+                        <div class="verticleilist listing-shot">
 
-                        <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
-                        <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
-                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                            <button type="button" class="btn btn-warning">En savoir plus</button>
-                        </a>
+
+
+                            <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
+
+                            <div class="signle-vert-listing-item">
+                                <div class="listing-items">
+                                    <div class="listing-shot-img">
+                                        <img src="{{ asset('/pictures/'~categorie.images.image) }}"
+                                             class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
+
+
+                            <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                                <button type="button" class="btn btn-warning">En savoir plus</button>
+                            </a>
+                        </div>
                         <br>
                         <br>
 
