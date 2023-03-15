@@ -120,15 +120,19 @@ class PrestataireController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $file = $form->get('images')->getData();
 
-            if ($file) {
+
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
                     $this->getParameter('pictures_directory'),
                     $fileName
                 );
-                $prestataire->setImages($fileName);
-            }
+                $image = new Images();
+                $image->setImage($fileName);
+                $prestataire->setPhoto($image);
+                $entityManager->persist($image);
+
             $prestataire = $form->getData();
+            $entityManager->persist($prestataire);
             $entityManager->flush();
 
             return $this->redirectToRoute('tousprestataires');
