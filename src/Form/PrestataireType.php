@@ -38,7 +38,7 @@ class PrestataireType extends AbstractType
             ->add('images', FileType::class, [
                 'label' => 'Votre photo',
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'accept' => 'image/*',
                 ],
