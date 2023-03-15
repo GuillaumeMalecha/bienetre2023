@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CategorieServices;
+use App\Entity\Prestataire;
 use App\Form\CategorieType;
 use App\Repository\CategorieServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -66,8 +67,13 @@ class CategorieController extends AbstractController
         $repository = $entityManager->getRepository(CategorieServices::class);
         $categorie = $repository->find($id);
 
+        // This retrieve the list of prestataires for the category
+        $prestataires = $categorie->getPrestataires();
+
+
         return $this->render('categorie/detail.html.twig', [
-            'categorie' => $categorie
+            'categorie' => $categorie,
+            'prestataires' => $prestataires,
         ]);
     }
 
