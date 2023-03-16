@@ -27,21 +27,23 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8 col-md-10">
                                     <div class="loving-modern-login">
-                                        <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
+                                        <i class="fas fa-bookmark"></i><span
+                                                class="prt-type rent">Catégorie du mois</span>
 
                                         <h2>{{ categorie.nom }} </h2>
                                         <p>Description : {{ categorie.description }}</p>
                                         {% if categorie.images is defined and categorie.images.image is defined %}
                                             <img
-                                                    src="{{ asset('/pictures/'~categorie.images.image) }}" class="img-fluid mx-auto" alt=""/>
+                                                    src="{{ asset('/pictures/'~categorie.images.image) }}"
+                                                    class="img-fluid mx-auto" alt=""/>
                                         {% endif %}
 
-                            <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
+                                        <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
 
 
-                            <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                                <button type="button" class="btn btn-warning">En savoir plus</button>
-                            </a>
+                                        <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
+                                            <button type="button" class="btn btn-warning">En savoir plus</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

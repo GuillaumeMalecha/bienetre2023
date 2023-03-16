@@ -51,7 +51,7 @@ class PrestataireType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true])
-            //->add('organiser')
+            //->add('stages')
             //->add('offrir')
             //->add('favori')
             //->add('concerner')

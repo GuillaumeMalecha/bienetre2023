@@ -2,29 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Prestataire;
-use App\Entity\Stage;
+use App\Entity\Promotion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StageType extends AbstractType
+class PromotionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom du stage',
+                'label' => 'Nom de la promotion',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description du stage',
+                'label' => 'Description de la promotion',
             ])
             ->add('affichagede', DateType::class, [
                 'label' => 'Affichage du',
@@ -41,29 +39,29 @@ class StageType extends AbstractType
                 'attr' => ['class' => 'datepicker'],
             ])
             ->add('debut', DateType::class, [
-                'label' => 'Début du stage',
+                'label' => 'Début de la promotion',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
                 'attr' => ['class' => 'datepicker'],
             ])
             ->add('fin', DateType::class, [
-                'label' => 'Fin du stage',
+                'label' => 'Fin de la promotion',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
                 'attr' => ['class' => 'datepicker'],
             ])
-            ->add('infocomplementaire', TextareaType::class, [
-                'label' => 'Informations complémentaires',
-            ])
-            ->add('tarif', TextType::class, [
-                'label' => 'Tarif',
-            ])
+
+            /*->add('documentpdf', FileType::class, [
+                'label' => 'Document PDF',
+                'mapped' => false,
+                'required' => false,
+            ])*/
             ->add('prestataire', EntityType::class, [
-                'class' => Prestataire::class,
-                'label' => 'Prestataire',
+                'class' => 'App\Entity\Prestataire',
                 'choice_label' => 'nom',
+                'label' => 'Prestataire',
             ])
             ->add('Enregistrer', SubmitType::class);
     }
@@ -71,7 +69,7 @@ class StageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Stage::class,
+            'data_class' => Promotion::class,
         ]);
     }
 }
