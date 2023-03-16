@@ -87,6 +87,15 @@
                                                 </div>
                                             </a>
                                         </li>
+
+                                        <li>
+                                            <a href="{{ path('app_promotion') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-ticket"></i>
+                                                    <h5>Les promotions<span>Les réductions du moment</span></h5>
+                                                </div>
+                                            </a>
+                                        </li>
                                         {% if is_granted('ROLE_ADMIN') == true %}
                                             <li>
                                                 <a href="{{ path('ajoutcategorie') }}">

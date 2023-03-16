@@ -34,17 +34,24 @@
                     <br>
                     <br>
 
-                    {% else %}
-                        <br>
-                        <h4><i class="fas fa-circle"></i> Trop tard : {{ promotion.nom }}</h4>
-                        <p>{{ promotion.description }} chez notre partenaire {{ promotion.prestataire.nom }}.</p>
-                        <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y') }}
-                            jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
-                        <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}">
-                            <button type="button" class="btn btn-secondary">Page du partenaire</button>
-                        </a>
-                        <br>
-                        <br>
+                {% endif %}
+            {% endfor %}
+
+            {# Une seconde boucle for pour que les promotions passées se retrouvent bien après les promotions en cours #}
+            {% for promotion in promotions %}
+
+                {% if promotion.affichagejusque < date('today') %}
+
+                    <br>
+                    <h4><i class="fas fa-circle"></i> Trop tard : {{ promotion.nom }}</h4>
+                    <p>{{ promotion.description }} chez notre partenaire {{ promotion.prestataire.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y') }}
+                        jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}">
+                        <button type="button" class="btn btn-secondary">Page du partenaire</button>
+                    </a>
+                    <br>
+                    <br>
                 {% endif %}
             {% endfor %}
         </ul>

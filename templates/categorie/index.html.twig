@@ -55,6 +55,8 @@
                     {% endif %}
                 {% endfor %}
 
+                {# Une seconde boucle for pour que les catégories qui ne sont pas mises en avant soient après #}
+
                 {% for categorie in categories %}
 
                     {% if categorie.enavant == false %}
