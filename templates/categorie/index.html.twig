@@ -19,24 +19,22 @@
     <div class="container">
         <div class="row justify-content-center">
             <ul class="col-lg-8 col-md-10">
-                <br>
                 {% for categorie in categories %}
 
                     {% if categorie.enavant == true %}
-                        <div class="verticleilist listing-shot">
 
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-md-10">
+                                    <div class="loving-modern-login">
+                                        <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
 
-
-                            <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
-
-                            <div class="signle-vert-listing-item">
-                                <div class="listing-items">
-                                    <div class="listing-shot-img">
-                                        <img src="{{ asset('/pictures/'~categorie.images.image) }}"
-                                             class="img-fluid" alt="">
-                                    </div>
-                                </div>
-                            </div>
+                                        <h2>{{ categorie.nom }} </h2>
+                                        <p>Description : {{ categorie.description }}</p>
+                                        {% if categorie.images is defined and categorie.images.image is defined %}
+                                            <img
+                                                    src="{{ asset('/pictures/'~categorie.images.image) }}" class="img-fluid mx-auto" alt=""/>
+                                        {% endif %}
 
                             <h3>Catégorie mise en avant : {{ categorie.nom }}</h3>
 
@@ -44,7 +42,11 @@
                             <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
                                 <button type="button" class="btn btn-warning">En savoir plus</button>
                             </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <br>
                         <br>
 

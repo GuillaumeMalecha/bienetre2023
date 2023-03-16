@@ -50,7 +50,6 @@ class PrestataireController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Handle uploaded file
             $imagesFile = $form->get('images')->getData();
             if ($imagesFile) {
                 $images = new Images();
@@ -120,7 +119,7 @@ class PrestataireController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $file = $form->get('images')->getData();
 
-
+            if($file){
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
                     $this->getParameter('pictures_directory'),
@@ -130,7 +129,7 @@ class PrestataireController extends AbstractController
                 $image->setImage($fileName);
                 $prestataire->setPhoto($image);
                 $entityManager->persist($image);
-
+            }
             $prestataire = $form->getData();
             $entityManager->persist($prestataire);
             $entityManager->flush();

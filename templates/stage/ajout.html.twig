@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un stage{% endblock %}
+
+{% block body %}
+
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h2 class="ipt-title">Ajouter un stage</h2>
+                    <span class="ipn-subtitle">Organisez un stage pour un prestataire</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h2>Ajouter un stage</h2>
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.nom) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.affichagede) }}
+                {{ form_row(form.affichagejusque) }}
+                {{ form_row(form.debut) }}
+                {{ form_row(form.fin) }}
+                {{ form_row(form.infocomplementaire) }}
+                {{ form_row(form.tarif) }}
+                {{ form_row(form.prestataires) }}
+                {{ form_row(form.Enregistrer) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

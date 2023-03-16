@@ -66,7 +66,7 @@
 
 
     <!-- ============================ Début du slider de photos ============================ -->
-    <section>
+{#    <section>
         <div class="container">
 
             <div class="row">
@@ -168,6 +168,45 @@
                 </div>
             </div>
         </div>
+    </section>#}
+
+    <!-- ============================ Fin du slider de photos ============================== -->
+
+    <!-- ============================ Début du slider de photos ============================ -->
+    <section>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="sec-heading center">
+                        <h2>Nos photos récentes</h2>
+                        <p>Les photos de nos prestataires.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="owl-carousel owl-theme" id="lists-slide">
+
+                    {% for prestataire in prestataires %}
+                    <div class="list-slide-box">
+                        <div class="modern-list ml-2">
+                            <div class="grid-category-thumb">
+                                <a href="{{ asset('/pictures/'~prestataire.photo.image) }}" class="mfp-gallery overlay-cate"><img
+                                            src="{{ asset('/pictures/'~prestataire.photo.image) }}" class="img-responsive" alt=""/></a>
+                                <div class="property_meta">
+                                    <h4 class="lst-title"><a href="{{ path ("detailprestataire", {id:prestataire.id}) }}">{{ prestataire.nom }}</a><span
+                                                class="veryfied-author"></span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ============================ Fin du slider de photos ============================== -->
@@ -187,7 +226,10 @@
                             <i class="fas fa-bookmark"></i><span class="prt-type rent">Catégorie du mois</span>
                             <h2>Catégorie mise en avant : {{ categorie.nom }}</h2>
                             <a href="{{ path ("detailcategorie", {id:categorie.id}) }}">
-                                <button type="button" class="btn btn-secondary">En savoir plus</button>
+                                <button type="button" class="btn btn-primary">En savoir plus</button>
+                            </a>
+                                <a href="{{ path ("toutescategories") }}">
+                                    <button type="button" class="btn btn-secondary">Toutes les catégories</button>
                             </a>
                             <br>
                             <br>

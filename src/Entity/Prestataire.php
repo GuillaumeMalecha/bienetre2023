@@ -65,7 +65,7 @@ class Prestataire
     private $proposer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Stage::class, inversedBy="prestataires")
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="prestataires")
      */
     private $organiser;
 

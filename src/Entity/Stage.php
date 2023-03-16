@@ -60,7 +60,8 @@ class Stage
     private $tarif;
 
     /**
-     * @ORM\OneToMany(targetEntity=Prestataire::class, mappedBy="organiser")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="organiser")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $prestataires;
 
