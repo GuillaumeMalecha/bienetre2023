@@ -21,15 +21,31 @@
         <br>
         <ul>
             {% for promotion in promotions %}
-                <i class="fas fa-star"></i><span
-                    class="prt-type rent">Promotion active</span>
-                <h3>Promotion : {{ promotion.nom }}</h3>
-                <p>{{ promotion.description }} chez notre prestataire {{ promotion.prestataire.nom }}.</p>
-                <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y')}} jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
-                <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}"><button type="button" class="btn btn-primary">En savoir plus</button></a>
+                {% if promotion.affichagede <= date('today') and promotion.affichagejusque >= date('today') %}
+                    <span class="prt-type rent">Offre activée</span>
+                    <h3><i class="fas fa-star"></i> Promotion : {{ promotion.nom }}</h3>
+                    <p>{{ promotion.description }} chez notre partenaire {{ promotion.prestataire.nom }}.</p>
+                    <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y') }}
+                        jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
+                    <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}">
+                        <button type="button" class="btn btn-primary">Page du partenaire</button>
+                    </a>
 
-                <br>
-                <br>
+                    <br>
+                    <br>
+
+                    {% else %}
+                        <br>
+                        <h4><i class="fas fa-circle"></i> Trop tard : {{ promotion.nom }}</h4>
+                        <p>{{ promotion.description }} chez notre partenaire {{ promotion.prestataire.nom }}.</p>
+                        <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y') }}
+                            jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
+                        <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}">
+                            <button type="button" class="btn btn-secondary">Page du partenaire</button>
+                        </a>
+                        <br>
+                        <br>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
