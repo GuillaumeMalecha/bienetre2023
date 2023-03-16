@@ -23,10 +23,12 @@ class HomeController extends AbstractController
         $listeCategories = $repository->findAll();
 
         $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataires = $repository->findAll();
         $derniersPrestataires = $repository->findBy([], ['id' => 'DESC'], 4);
 
         return $this->render('home/index.html.twig', [
             'categories' => $listeCategories,
+            'prestataires' => $prestataires,
             'derniersPrestataires' => $derniersPrestataires,
         ]);
     }

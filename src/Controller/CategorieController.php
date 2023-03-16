@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\CategorieServices;
+use App\Entity\Images;
+use App\Entity\Prestataire;
 use App\Form\CategorieType;
 use App\Repository\CategorieServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +47,17 @@ class CategorieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image')->getData();
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $this->getParameter('pictures_directory'),
+                $filename
+            );
+            $image = new Images();
+            $image->setImage($filename);
+            $categorie->setImages($image);
+            $entityManager->persist($image);
+
             $categorie = $form->getData();
             $entityManager->persist($categorie);
             $entityManager->flush();
@@ -66,8 +79,13 @@ class CategorieController extends AbstractController
         $repository = $entityManager->getRepository(CategorieServices::class);
         $categorie = $repository->find($id);
 
+        // This retrieve the list of prestataires for the category
+        $prestataires = $categorie->getPrestataires();
+
+
         return $this->render('categorie/detail.html.twig', [
-            'categorie' => $categorie
+            'categorie' => $categorie,
+            'prestataires' => $prestataires,
         ]);
     }
 

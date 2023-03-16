@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des promotions actives{% endblock %}
+
+{% block body %}
+
+    <div class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <h2 class="ipt-title">Toutes les promotions</h2>
+                    <span class="ipn-subtitle">Le bien-être à votre portée.</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <br>
+        <ul>
+            {% for promotion in promotions %}
+                <i class="fas fa-star"></i><span
+                    class="prt-type rent">Promotion active</span>
+                <h3>Promotion : {{ promotion.nom }}</h3>
+                <p>{{ promotion.description }} chez notre prestataire {{ promotion.prestataire.nom }}.</p>
+                <p>Promotion valable à partir du {{ promotion.debut|date('d/m/Y')}} jusqu'au {{ promotion.fin|date('d/m/Y') }}.</p>
+                <a href="{{ path ("detailprestataire", {id:promotion.prestataire.id}) }}"><button type="button" class="btn btn-primary">En savoir plus</button></a>
+
+                <br>
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

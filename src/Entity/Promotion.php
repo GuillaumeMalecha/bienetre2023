@@ -40,7 +40,7 @@ class Promotion
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable="true")
      */
     private $documentpdf;
 
@@ -55,19 +55,21 @@ class Promotion
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Prestataire::class, mappedBy="offrir")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="promotions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $prestataires;
+
+    private $prestataire;
 
     /**
      * @ORM\OneToMany(targetEntity=CategorieServices::class, mappedBy="promotion")
      */
-    private $concerner;
+
+    private $categorieServices;
 
     public function __construct()
     {
-        $this->prestataires = new ArrayCollection();
-        $this->concerner = new ArrayCollection();
+        $this->categorieServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,63 +161,16 @@ class Promotion
         return $this;
     }
 
-    /**
-     * @return Collection<int, Prestataire>
-     */
-    public function getPrestataires(): Collection
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
-    public function addPrestataire(Prestataire $prestataire): self
+    public function setPrestataire($prestataire): self
     {
-        if (!$this->prestataires->contains($prestataire)) {
-            $this->prestataires[] = $prestataire;
-            $prestataire->setOffrir($this);
-        }
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
-    public function removePrestataire(Prestataire $prestataire): self
-    {
-        if ($this->prestataires->removeElement($prestataire)) {
-            // set the owning side to null (unless already changed)
-            if ($prestataire->getOffrir() === $this) {
-                $prestataire->setOffrir(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CategorieServices>
-     */
-    public function getConcerner(): Collection
-    {
-        return $this->concerner;
-    }
-
-    public function addConcerner(CategorieServices $concerner): self
-    {
-        if (!$this->concerner->contains($concerner)) {
-            $this->concerner[] = $concerner;
-            $concerner->setPromotion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeConcerner(CategorieServices $concerner): self
-    {
-        if ($this->concerner->removeElement($concerner)) {
-            // set the owning side to null (unless already changed)
-            if ($concerner->getPromotion() === $this) {
-                $concerner->setPromotion(null);
-            }
-        }
-
-        return $this;
-    }
 }

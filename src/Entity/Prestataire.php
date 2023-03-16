@@ -65,14 +65,14 @@ class Prestataire
     private $proposer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Stage::class, inversedBy="prestataires")
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="prestataire")
      */
-    private $organiser;
+    private $stages;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="prestataires")
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="prestataire")
      */
-    private $offrir;
+    private $promotions;
 
     /**
      * @ORM\ManyToMany(targetEntity=Internaute::class, inversedBy="prestataires")
@@ -215,26 +215,44 @@ class Prestataire
         return $this;
     }
 
-    public function getOrganiser(): ?Stage
+    public function getStages(): Collection
     {
-        return $this->organiser;
+        return $this->stages;
     }
 
-    public function setOrganiser(?Stage $organiser): self
+    public function addStages(Stage $stages): self
     {
-        $this->organiser = $organiser;
+        if (!$this->stages->contains($stages)) {
+            $this->stages[] = $stages;
+        }
 
         return $this;
     }
 
-    public function getOffrir(): ?Promotion
+    public function removeStage(Stage $stage): self
     {
-        return $this->offrir;
+        $this->favori->removeElement($stage);
+
+        return $this;
     }
 
-    public function setOffrir(?Promotion $offrir): self
+    public function getPromotions(): Collection
     {
-        $this->offrir = $offrir;
+        return $this->promotions;
+    }
+
+    public function addPromotions(Promotion $promotions): self
+    {
+        if (!$this->promotions->contains($promotions)) {
+            $this->promotions[] = $promotions;
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        $this->favori->removeElement($promotion);
 
         return $this;
     }

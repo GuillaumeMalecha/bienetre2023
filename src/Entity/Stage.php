@@ -60,14 +60,11 @@ class Stage
     private $tarif;
 
     /**
-     * @ORM\OneToMany(targetEntity=Prestataire::class, mappedBy="organiser")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="stages")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $prestataires;
+    private $prestataire;
 
-    public function __construct()
-    {
-        $this->prestataires = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -170,33 +167,18 @@ class Stage
         return $this;
     }
 
-    /**
-     * @return Collection<int, Prestataire>
-     */
-    public function getPrestataires(): Collection
+
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
-    public function addPrestataire(Prestataire $prestataire): self
+    public function setPrestataire($prestataire): self
     {
-        if (!$this->prestataires->contains($prestataire)) {
-            $this->prestataires[] = $prestataire;
-            $prestataire->setOrganiser($this);
-        }
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
-    public function removePrestataire(Prestataire $prestataire): self
-    {
-        if ($this->prestataires->removeElement($prestataire)) {
-            // set the owning side to null (unless already changed)
-            if ($prestataire->getOrganiser() === $this) {
-                $prestataire->setOrganiser(null);
-            }
-        }
 
-        return $this;
-    }
 }
