@@ -96,6 +96,16 @@
                                                 </div>
                                             </a>
                                         </li>
+
+                                        <li>
+                                            <a href="{{ path('app_stage') }}">
+                                                <div class="mg-menu-items">
+                                                    <i class="lni-medall"></i>
+                                                    <h5>Les stages<span>Actions en ce moment</span></h5>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        
                                         {% if is_granted('ROLE_ADMIN') == true %}
                                             <li>
                                                 <a href="{{ path('ajoutcategorie') }}">

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Images;
 use App\Entity\Prestataire;
 use App\Entity\Promotion;
+use App\Entity\Stage;
 use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
 use App\Repository\PrestataireRepository;
@@ -88,9 +89,13 @@ class PrestataireController extends AbstractController
         $repository = $entityManager->getRepository(Promotion::class);
         $promotions = $repository->findBy(['prestataire' => $id]);
 
+        $repository = $entityManager->getRepository(Stage::class);
+        $stages = $repository->findBy(['prestataire' => $id]);
+
         return $this->render('prestataire/detail.html.twig', [
             'prestataire' => $prestataire,
-            'promotions' => $promotions
+            'promotions' => $promotions,
+            'stages' => $stages,
         ]);
     }
 

@@ -138,6 +138,42 @@
                     {% endif %}
 
 
+                    {% if stages is not null %}
+                        <div class="block-wrap">
+                            {% for stage in stages %}
+                                {% if stage.affichagede <= date('today') and stage.affichagejusque >= date('today') %}
+
+                                    <div class="block-header">
+                                        <h4 class="block-title">Stage proposé en cours : {{ stage.nom }}</h4>
+                                    </div>
+                                    <div class="block-body">
+                                        <p>{{ stage.description }}</p>
+                                        <p>Stage se déroulant à partir du {{ stage.debut|date('d/m/Y') }}
+                                            jusqu'au {{ stage.fin|date('d/m/Y') }}.</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {# Une seconde boucle for pour que les stages dans le passé se retrouvent bien après les stages en cours #}
+
+                            {% for stage in stages %}
+
+                                {% if stage.affichagejusque < date('today') %}
+                                    <div class="block-header">
+                                        <h4 class="block-title">Stage terminé : {{ stage.nom }}</h4>
+                                    </div>
+                                    <div class="block-body">
+                                        <p>{{ stage.description }}</p>
+                                        <p>Ce stage s'est déroulé à partir du {{ stage.debut|date('d/m/Y') }}
+                                            jusqu'au {{ stage.fin|date('d/m/Y') }}.</p>
+                                    </div>
+
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+
                     {% if is_granted('ROLE_ADMIN') == true %}
                         <a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
                             <button type="button" class="btn btn-info">Modifier le prestataire</button>

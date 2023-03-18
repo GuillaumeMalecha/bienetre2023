@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Stage;
 use App\Form\StageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,16 @@ class StageController extends AbstractController
     /**
      * @Route("/stage", name="app_stage")
      */
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $repository = $entityManager->getRepository(Stage::class);
+        $listeStages = $repository->findAll();
+
+        if (!$listeStages) {
+            return $this->redirectToRoute('app_stage_ajout');
+        }
         return $this->render('stage/index.html.twig', [
+            'stages' => $listeStages,
             'controller_name' => 'StageController',
         ]);
     }
