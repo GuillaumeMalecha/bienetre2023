@@ -37,6 +37,13 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
+            $existingUser = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $email]);
+
+            if ($existingUser) {
+                $this->addFlash('danger', 'Cette adresse email est déjà utilisée.');
+                return $this->redirectToRoute('app_register');
+            }
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -53,10 +60,11 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('bonjour@bienetre.be', 'Votre Bien Être'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Merci de confirmer votre adresse email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
+
+
 
             return $this->redirectToRoute('home');
         }

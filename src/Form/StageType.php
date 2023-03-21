@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,40 +32,51 @@ class StageType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('affichagejusque', DateType::class, [
                 'label' => 'Affichage jusqu\'au',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('debut', DateType::class, [
                 'label' => 'Début du stage',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('fin', DateType::class, [
                 'label' => 'Fin du stage',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('infocomplementaire', TextareaType::class, [
                 'label' => 'Informations complémentaires',
             ])
-            ->add('tarif', TextType::class, [
-                'label' => 'Tarif',
+            ->add('tarif', MoneyType::class, [
+                'label' => 'Prix du stage',
+                'label_attr' => ['class' => ''],
+                'currency' => '', //ce champ est délibérément vide car le symbol € n'est pas pris en compte par le theme
+                'scale' => 2,
+                'required' => true,
+                'divisor' => 100,
+                'attr' => ['class' => '.font-12',
+                    'placeholder' => '€'],
             ])
-            ->add('prestataire', EntityType::class, [
+            /*->add('prestataire', EntityType::class, [
                 'class' => Prestataire::class,
                 'label' => 'Prestataire',
                 'choice_label' => 'nom',
-            ])
+            ])*/
             ->add('Enregistrer', SubmitType::class);
     }
 

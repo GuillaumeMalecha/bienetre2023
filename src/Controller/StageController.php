@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Prestataire;
 use App\Entity\Stage;
 use App\Form\StageType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,15 +31,18 @@ class StageController extends AbstractController
     }
 
     /**
-     * @Route("/stage/ajout", name="app_stage_ajout")
+     * @Route("/detailprestataire/{id}/stage/ajout", name="app_stage_ajout")
      */
-    public function ajoutStage(Request $request, EntityManagerInterface $entityManager): Response
+    public function ajoutStage(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataire = $repository->find($id);
         $form = $this->createForm(StageType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $stage = $form->getData();
+            $stage->setPrestataire($prestataire);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($stage);
             $entityManager->flush();
@@ -48,6 +52,7 @@ class StageController extends AbstractController
         return $this->render('stage/ajout.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'StageController',
+            'prestataire' => $prestataire,
         ]);
     }
 

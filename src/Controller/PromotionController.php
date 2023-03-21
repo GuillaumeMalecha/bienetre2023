@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Prestataire;
 use App\Entity\Promotion;
 use App\Form\PromotionType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,49 +32,18 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/promotion/ajout", name="app_promotion_ajout")
+     * @Route("/detailprestataire/{id}/promotion/ajout", name="app_promotion_ajout")
      */
-
-/*    public function ajoutPromotion(Request $request, EntityManagerInterface $entityManager): Response
+    public function ajoutPromotion(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $promotion = new Promotion();
-        $form = $this->createForm(PromotionType::class, $promotion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $pdfFile = $form->get('pdf')->getData();
-            if ($pdfFile) {
-                $pdf = new DocumentPdf();
-                $fileName = md5(uniqid()) . '.' . $pdfFile->guessExtension();
-                $pdfFile->move(
-                    $this->getParameter('pdf_directory'),
-                    $fileName
-                );
-                $pdf->setNom($fileName);
-                $pdf->setPromotion($promotion);
-                $entityManager->persist($pdf);
-            }
-            //$promotion = $form->getData();
-            //$entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($promotion);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_promotion');
-        }
-        return $this->render('promotion/ajout.html.twig', [
-            'form' => $form->createView(),
-            'controller_name' => 'PromotionController',
-        ]);
-    }*/
-
-    public function ajoutPromotion(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        $repository = $entityManager->getRepository(Prestataire::class);
+        $prestataire = $repository->find($id);
         $form = $this->createForm(PromotionType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $promotion = $form->getData();
+            $promotion->setPrestataire($prestataire);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($promotion);
             $entityManager->flush();
@@ -84,6 +54,7 @@ class PromotionController extends AbstractController
         return $this->render('promotion/ajout.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'PromotionController',
+            'prestataire' => $prestataire,
         ]);
     }
 

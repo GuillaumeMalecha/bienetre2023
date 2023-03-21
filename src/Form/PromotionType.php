@@ -29,40 +29,44 @@ class PromotionType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('affichagejusque', DateType::class, [
                 'label' => 'Affichage jusqu\'au',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('debut', DateType::class, [
                 'label' => 'Début de la promotion',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
             ->add('fin', DateType::class, [
                 'label' => 'Fin de la promotion',
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd/MM/yyyy',
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['class' => 'datepicker',
+                    'placeholder' => 'jj/mm/aaaa'],
             ])
 
             /*->add('documentpdf', FileType::class, [
                 'label' => 'Document PDF',
                 'mapped' => false,
                 'required' => false,
-            ])*/
+            ])
             ->add('prestataire', EntityType::class, [
                 'class' => 'App\Entity\Prestataire',
                 'choice_label' => 'nom',
                 'label' => 'Prestataire',
-            ])
+            ])*/
             ->add('Enregistrer', SubmitType::class);
     }
 
