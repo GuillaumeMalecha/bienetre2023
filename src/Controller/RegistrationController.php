@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Internaute;
+use App\Entity\Prestataire;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
@@ -33,6 +35,7 @@ class RegistrationController extends AbstractController
         $user = new Utilisateur();
         $user->setIsVerified(true);
         $user->setInscription(new \DateTime('now'));
+        $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -44,6 +47,23 @@ class RegistrationController extends AbstractController
                 $this->addFlash('danger', 'Cette adresse email est déjà utilisée.');
                 return $this->redirectToRoute('app_register');
             }
+
+            // Get the user profile type from the form submission
+            $userProfileType = $form->get('typeutilisateur')->getData();
+
+            // Create the appropriate user profile based on the selected type
+            if ($userProfileType === 'prestataire') {
+                $userProfile = new Prestataire();
+                $routeinscription = 'ajoutprestataire';
+            } elseif ($userProfileType === 'internaute') {
+                $userProfile = new Internaute();
+                $routeinscription = 'ajoutinternaute';
+
+            }
+
+            // Set the user profile on the user entity
+            $user->setTypeutilisateur($userProfile);
+
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -66,7 +86,7 @@ class RegistrationController extends AbstractController
 
 
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute($routeinscription);
         }
 
         return $this->render('registration/register.html.twig', [
@@ -95,4 +115,5 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
 }

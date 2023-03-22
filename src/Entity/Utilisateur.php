@@ -103,6 +103,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+    private Prestataire $userProfile;
 
     public function __construct()
     {
@@ -419,4 +420,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
+
+
 }

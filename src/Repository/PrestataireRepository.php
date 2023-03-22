@@ -54,7 +54,7 @@ class PrestataireRepository extends ServiceEntityRepository
     /**
      * @return Prestataire[] Returns an array of Prestataire objects
      */
-    public function findByNom($nom = null, $categorie = null): array
+    public function findByRecherche($nom = null, $categorie = null, $localite = null): array
     {
         $query = $this->createQueryBuilder('p');
             if ($nom != null) {
@@ -67,9 +67,13 @@ class PrestataireRepository extends ServiceEntityRepository
                 ->andWhere('c.id = :categorie')
                 ->setParameter('categorie', $categorie);
             }
+            if ($localite != null) {
+                $query->leftJoin('p.localite', 'l')
+                    ->leftJoin('l.utilisateur', 'u')
+                ->andWhere('u.id = :utilisateur')
+                ->setParameter('utilisateur', $localite);
+            }
 
-            //->orderBy('p.id', 'ASC')
-            //->setMaxResults(10)
         return $query
             ->getQuery()
             ->getResult()

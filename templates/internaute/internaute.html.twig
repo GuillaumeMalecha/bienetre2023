@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations de l'internaute {{ internaute.nom }}{% endblock %}
+
+{% block body %}
+
+<section class="gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="block-wrap">
+                    <div class="block-header">
+                        <h4 class="block-title">Profil de : {{ internaute.prenom }} {{ internaute.nom }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

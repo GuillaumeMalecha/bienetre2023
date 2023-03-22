@@ -48,24 +48,10 @@ class HomeController extends AbstractController
 
         $nom = $formData['nom'] ?? null;
         $categorieId = $formData['categorie'] ?? null;
+        $localite = $formData['localite'] ?? null;
 
         $repository = $entityManager->getRepository(Prestataire::class);
-        $rechercheNom = $repository->findByNom($nom, $categorieId);
-/*        $rechercheNom = $entityManager->createQueryBuilder()
-            ->select('e')
-            ->from(Prestataire::class, 'e')
-            ->where('e.nom LIKE :nom')
-            ->setParameter('nom', '%'.$nom.'%');*/
-
-        $repository = $entityManager->getRepository(CategorieServices::class);
-/*        if ($categorieServiceId) {
-            $rechercheNom->innerJoin('e.categoriesServices', 'f')
-                ->andWhere('f.id = :id')
-                ->setParameter('id', $categorieServiceId);
-        }*/
-
-//        $rechercheNom = $rechercheNom->getQuery()
-  //          ->getResult();
+        $rechercheNom = $repository->findByRecherche($nom, $categorieId, $localite);
 
         $pagination = $paginator->paginate(
             $rechercheNom,
