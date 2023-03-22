@@ -3,33 +3,40 @@
 {% block title %}Tous les Prestataires !{% endblock %}
 
 {% block body %}
-    <div class="page-title">
+    <section class="gray-bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-
                     <h2 class="ipt-title">Tous les Prestataires</h2>
                     <span class="ipn-subtitle">Une liste qui vous aidera à trouver le service à votre service.</span>
-
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container">
-        <br>
-    <ul>
-            {% for prestataire in prestataires %}
-                <i class="fas fa-bookmark"></i>
-                <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
-                <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }} - {{ prestataire.siteinternet }}</p>
-                <p>Numéro de TVA : {{ prestataire.numtva }} </p>
-                <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}"><button type="button" class="btn btn-warning">En savoir plus</button></a>
-                <br>
-                <br>
-
-            {% endfor %}
-        </ul>
-    </div>
+    <section>
+        <div class="container">
+            <br>
+            <ul>
+                {# Boucle d'affichage des prestataires #}
+                {% for prestataire in pagination %}
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Nom du prestataire : {{ prestataire.nom }}</h3>
+                    <p>Contact : {{ prestataire.emailcontact }} - {{ prestataire.numtel }}
+                        - {{ prestataire.siteinternet }}</p>
+                    <p>Numéro de TVA : {{ prestataire.numtva }} </p>
+                    <a href="{{ path ("detailprestataire", {id:prestataire.id}) }}">
+                        <button type="button" class="btn btn-warning">En savoir plus</button>
+                    </a>
+                    <br>
+                    <br>
+                {% endfor %}
+            </ul>
+        </div>
+        {# Gestion de la pagination #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
 
 {% endblock %}

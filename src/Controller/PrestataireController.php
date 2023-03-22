@@ -10,6 +10,7 @@ use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
 use App\Repository\PrestataireRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +25,16 @@ class PrestataireController extends AbstractController
     /**
      * @Route("/prestataires", name="tousprestataires")
      */
-    public function tousprestataires(EntityManagerInterface $entityManager): Response
+    public function tousprestataires(EntityManagerInterface $entityManager, PaginatorInterface $paginator, Request $request): Response
     {
         $repository = $entityManager->getRepository(Prestataire::class);
         $listePrestataires = $repository->findAll();
+
+        $pagination = $paginator->paginate(
+            $listePrestataires,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         if (!$listePrestataires) {
             return $this->redirectToRoute('ajoutprestataire');
@@ -35,6 +42,7 @@ class PrestataireController extends AbstractController
 
         return $this->render('prestataire/index.html.twig', [
             'prestataires' => $listePrestataires,
+            'pagination' => $pagination,
         ]);
     }
 
