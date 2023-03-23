@@ -33,7 +33,7 @@ class PrestataireController extends AbstractController
         $pagination = $paginator->paginate(
             $listePrestataires,
             $request->query->getInt('page', 1),
-            6
+            5
         );
 
         if (!$listePrestataires) {

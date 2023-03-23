@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <!-- ============================ Page Title Start================================== -->
+    <!-- ============================ Début du titre de la page ================================== -->
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -15,9 +15,9 @@
             </div>
         </div>
     </div>
-    <!-- ============================ Page Title End ================================== -->
+    <!-- ============================ Fin du titre de la page ================================== -->
 
-    <!-- ============================ Contact Form Start ================================== -->
+    <!-- ============================ Début du formulaire de contact ================================== -->
     <section>
 
         <div class="container">
@@ -59,6 +59,10 @@
                         {{ form_end(contact_form) }}
                 </div>
 
+                <!-- ============================ Fin du formulaire de contact ================================== -->
+
+                <!-- ============================ Début des informations de contact ================================== -->
+
                 <div class="col-lg-5 col-md-5">
                     <div class="contact-info">
 
@@ -71,7 +75,7 @@
                             </div>
                             <div class="cn-info-content">
                                 <h4 class="cn-info-title">Nous écrire</h4>
-                                Boulevard d'Avroy 128<br>4000 Liège<br>Belgique
+                                Rue Saint-Laurent<br>4000 Liège<br>Belgique
                             </div>
                         </div>
 
@@ -81,7 +85,7 @@
                             </div>
                             <div class="cn-info-content">
                                 <h4 class="cn-info-title">Par e-mail</h4>
-                                bonjour@bienetre.com<br>gm@bienetre.com
+                                <a href="mailto:bonjour@bienetre.com">bonjour@bienetre.com</a>
                             </div>
                         </div>
 
@@ -91,7 +95,8 @@
                             </div>
                             <div class="cn-info-content">
                                 <h4 class="cn-info-title">Nous appeler</h4>
-                                +32 485 12 13 14<br>+33 723 55 48 75
+                                <a href="tel:+32485121314">+32(0)485/12.13.14</a><br>
+                                <a href="tel:+33723554875">+33(0)7/23.55.48.75</a>
                             </div>
                         </div>
 
@@ -99,14 +104,14 @@
                 </div>
 
             </div>
-            <!-- /row -->
 
         </div>
 
     </section>
-    <!-- ============================ Agency List End ================================== -->
+    <!-- ============================ Fin des informations de contact ================================== -->
 
-    <!-- ============================ Newsletter Start ================================== -->
+    <!-- ============================ Bandeau d'inscription à la newsletter ================================== -->
+
     <section class="newsletter theme-bg" style="background-image:url(../../public/assets/img/bg-new.png)">
         <div class="container">
 
@@ -132,7 +137,7 @@
             </div>
         </div>
     </section>
-    <!-- ============================ Newsletter End ================================== -->
 
+    <!-- ============================ Fin du bandeau d'inscription à la newsletter ================================== -->
 
 {% endblock %}
