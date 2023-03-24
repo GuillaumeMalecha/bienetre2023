@@ -55,6 +55,11 @@ class Images
         $this->prestataires = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->image;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

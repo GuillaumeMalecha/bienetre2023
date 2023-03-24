@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cette adresse email.")
  */
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -75,19 +75,22 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $typeutilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity=CodePostal::class, mappedBy="utilisateur")
+     * @ORM\ManyToOne(targetEntity=CodePostal::class, inversedBy="utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $adressecp;
+    private $codepostal;
 
     /**
-     * @ORM\OneToMany(targetEntity=Localite::class, mappedBy="utilisateur")
+     * @ORM\ManyToOne(targetEntity=Localite::class, inversedBy="utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $adresselocalite;
+    private $localite;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commune::class, mappedBy="utilisateur")
+     * @ORM\ManyToOne(targetEntity=Commune::class, inversedBy="utilisateur")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $adressecommune;
+    private $commune;
 
     /**
      * @ORM\OneToOne(targetEntity=Internaute::class, cascade={"persist", "remove"})
@@ -105,12 +108,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
     private Prestataire $userProfile;
 
-    public function __construct()
-    {
-        $this->adressecp = new ArrayCollection();
-        $this->adresselocalite = new ArrayCollection();
-        $this->adressecommune = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
@@ -285,95 +283,44 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, CodePostal>
-     */
-    public function getAdressecp(): Collection
+    public function getLocalite(): ?Localite
     {
-        return $this->adressecp;
+        return $this->localite;
     }
 
-    public function addAdressecp(CodePostal $adressecp): self
+    public function setLocalite(?Localite $localite): self
     {
-        if (!$this->adressecp->contains($adressecp)) {
-            $this->adressecp[] = $adressecp;
-            $adressecp->setUtilisateur($this);
-        }
+        $this->localite = $localite;
 
         return $this;
     }
 
-    public function removeAdressecp(CodePostal $adressecp): self
+    public function getCommune(): ?Commune
     {
-        if ($this->adressecp->removeElement($adressecp)) {
-            // set the owning side to null (unless already changed)
-            if ($adressecp->getUtilisateur() === $this) {
-                $adressecp->setUtilisateur(null);
-            }
-        }
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Localite>
-     */
-    public function getAdresselocalite(): Collection
+
+    public function getCodepostal(): ?CodePostal
     {
-        return $this->adresselocalite;
+        return $this->codepostal;
     }
 
-    public function addAdresselocalite(Localite $adresselocalite): self
+    public function setCodepostal(?CodePostal $codepostal): self
     {
-        if (!$this->adresselocalite->contains($adresselocalite)) {
-            $this->adresselocalite[] = $adresselocalite;
-            $adresselocalite->setUtilisateur($this);
-        }
+        $this->codepostal = $codepostal;
 
         return $this;
     }
 
-    public function removeAdresselocalite(Localite $adresselocalite): self
-    {
-        if ($this->adresselocalite->removeElement($adresselocalite)) {
-            // set the owning side to null (unless already changed)
-            if ($adresselocalite->getUtilisateur() === $this) {
-                $adresselocalite->setUtilisateur(null);
-            }
-        }
 
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commune>
-     */
-    public function getAdressecommune(): Collection
-    {
-        return $this->adressecommune;
-    }
-
-    public function addAdressecommune(Commune $adressecommune): self
-    {
-        if (!$this->adressecommune->contains($adressecommune)) {
-            $this->adressecommune[] = $adressecommune;
-            $adressecommune->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdressecommune(Commune $adressecommune): self
-    {
-        if ($this->adressecommune->removeElement($adressecommune)) {
-            // set the owning side to null (unless already changed)
-            if ($adressecommune->getUtilisateur() === $this) {
-                $adressecommune->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getProfil(): ?Internaute
     {

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommuneRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,13 +25,18 @@ class Commune
     private $commune;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="adressecommune")
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="commune")
      */
     private $utilisateur;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __construct()
+    {
+        $this->utilisateur = new ArrayCollection();
     }
 
     public function getCommune(): ?string
@@ -44,7 +51,7 @@ class Commune
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    public function getUtilisateur(): Collection
     {
         return $this->utilisateur;
     }

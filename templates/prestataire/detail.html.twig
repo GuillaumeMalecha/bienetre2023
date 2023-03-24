@@ -98,6 +98,8 @@
                     </div>
 
                     {# Affichage des promotions #}
+                    {# Visible uniquement pour les utilisateurs identifiés #}
+                    {% if is_granted('ROLE_USER') == true %}
 
                     {% if promotions is not empty %}
                         <div class="block-wrap">
@@ -143,6 +145,8 @@
                             </div>
                         </div>
                     {% endif %}
+                    {% endif %}
+
 
                     {# Affichage des stages #}
 

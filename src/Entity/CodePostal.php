@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CodePostalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,10 +22,10 @@ class CodePostal
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $CodePostal;
+    private $codepostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="adressecp")
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="codePostal")
      */
     private $utilisateur;
 
@@ -32,19 +34,24 @@ class CodePostal
         return $this->id;
     }
 
-    public function getCodePostal(): ?string
+    public function __construct()
     {
-        return $this->CodePostal;
+        $this->utilisateur = new ArrayCollection();
     }
 
-    public function setCodePostal(string $CodePostal): self
+    public function getCodePostal(): ?string
     {
-        $this->CodePostal = $CodePostal;
+        return $this->codepostal;
+    }
+
+    public function setCodePostal(string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
 
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    public function getUtilisateur(): Collection
     {
         return $this->utilisateur;
     }

@@ -87,6 +87,7 @@
                                                 </div>
                                             </a>
                                         </li>
+                                        {% if is_granted('ROLE_USER') == true %}
 
                                         <li>
                                             <a href="{{ path('app_promotion') }}">
@@ -96,6 +97,7 @@
                                                 </div>
                                             </a>
                                         </li>
+                                        {% endif %}
 
                                         <li>
                                             <a href="{{ path('app_stage') }}">

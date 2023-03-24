@@ -6,6 +6,7 @@ use App\Entity\Prestataire;
 use App\Entity\Promotion;
 use App\Form\PromotionType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ class PromotionController extends AbstractController
 {
     /**
      * @Route("/promotion", name="app_promotion")
+     * @IsGranted("ROLE_USER")
      */
     public function index(EntityManagerInterface $entityManager): Response
     {

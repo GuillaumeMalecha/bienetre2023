@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Internaute;
+use App\Entity\Utilisateur;
 use App\Form\InternauteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,22 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class InternauteController extends AbstractController
 {
     /**
-     * @Route("/ajoutinternaute", name="/ajoutinternaute")
+     * @Route("/ajoutinternaute/{userId}", name="ajoutinternaute")
      */
-    public function ajoutinternaute(Request $request, EntityManagerInterface $entityManager): Response
+    public function ajoutinternaute($userId, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $repository = $entityManager->getRepository(Utilisateur::class);
+        $user = $repository->find($userId);
         $internaute = new Internaute();
         $form = $this->createForm(InternauteType::class, $internaute);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->setProfil($internaute);
+            $localite = $form->get('localite')->getData();
+            $user->setLocalite($localite);
             $entityManager->persist($internaute);
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('internaute/index.html.twig', [
+        return $this->render('internaute/ajout.html.twig', [
             'form' => $form->createView(),
         ]);
     }

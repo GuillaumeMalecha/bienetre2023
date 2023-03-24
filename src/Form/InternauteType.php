@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Internaute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,15 +18,31 @@ class InternauteType extends AbstractType
             ->add('newsletter', CheckboxType::class, [
                 'label' => "Je souhaite recevoir la Newsletter",
                 'mapped' => false,
-                'required' => false
+                'required' => false,
             ])
-            ->add('nom')
-            ->add('prenom')
-            ->add('images')
-            ->add('blocs')
-            ->add('prestataires')
-            ->add('commentaire')
-            ->add('abus')
+            ->add('nom', TextType::class, [
+                'label' => "Nom",
+                'required' => true,
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => "Prénom",
+                'required' => true,
+            ])
+//            ->add('adresse', TextType::class, [
+//                'label' => "Adresse",
+//                'mapped' => false,
+//                'required' => true,
+//            ])
+            //->add('images')
+            //->add('blocs')
+            //->add('prestataires')
+            //->add('commentaire')
+            //->add('abus')
+            ->add('Enregistrer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
         ;
     }
 
