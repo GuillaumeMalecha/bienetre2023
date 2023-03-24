@@ -53,16 +53,16 @@ class RegistrationController extends AbstractController
 
             // Create the appropriate user profile based on the selected type
             if ($userProfileType === 'prestataire') {
-                $userProfile = new Prestataire();
+                $userProfile = 'prestataire';
                 $routeinscription = 'ajoutprestataire';
             } elseif ($userProfileType === 'internaute') {
-                $userProfile = new Internaute();
+                $userProfile = 'internaute';
                 $routeinscription = 'ajoutinternaute';
 
             }
 
             // Set the user profile on the user entity
-            $user->setTypeutilisateur($userProfile);
+            $user->setTypeutilisateur((string)$userProfile);
 
             // encode the plain password
             $user->setPassword(
@@ -86,7 +86,8 @@ class RegistrationController extends AbstractController
 
 
 
-            return $this->redirectToRoute($routeinscription);
+            return $this->redirectToRoute($routeinscription, [
+                'userId' => $user->getId()]);
         }
 
         return $this->render('registration/register.html.twig', [

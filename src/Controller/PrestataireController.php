@@ -49,7 +49,6 @@ class PrestataireController extends AbstractController
 
     /**
      * @Route("/ajoutprestataire", name="ajoutprestataire")
-     * @IsGranted("ROLE_ADMIN")
      */
     public function ajoutprestataire(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -69,9 +68,9 @@ class PrestataireController extends AbstractController
                     $fileName
                 );
                 $images->setImage($fileName);
-                $prestataire->setImages($images);
+                $prestataire->setPhoto($images);
             } else {
-                $prestataire->setImages(null);
+                $prestataire->setPhoto(null);
             }
 
             $entityManager->persist($prestataire);
