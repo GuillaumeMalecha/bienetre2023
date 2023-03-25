@@ -48,10 +48,10 @@ class HomeController extends AbstractController
 
         $nom = $formData['nom'] ?? null;
         $categorieId = $formData['categorie'] ?? null;
-        $localite = $formData['localite'] ?? null;
+        $commune = $formData['commune'] ?? null;
 
         $repository = $entityManager->getRepository(Prestataire::class);
-        $rechercheNom = $repository->findByRecherche($nom, $categorieId, $localite);
+        $rechercheNom = $repository->findByRecherche($nom, $categorieId, $commune);
 
         $pagination = $paginator->paginate(
             $rechercheNom,
