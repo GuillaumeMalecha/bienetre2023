@@ -1,5 +1,7 @@
 # Site bien-être 2023
 
+![Logo](https://i.imgur.com/SCrbC7o.png)
+
 ## Deployer le site
 
 ### Technologies utilisées :
