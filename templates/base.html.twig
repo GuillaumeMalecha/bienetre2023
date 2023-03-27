@@ -11,13 +11,12 @@
         <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/css/nav.css') }}"/>
 
-
-
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}"/>
 
         <!-- Custom Color Option -->
         <link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet">
+
     {% endblock %}
 </head>
 <body class="yellow-skin">
@@ -200,29 +199,10 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="">
-                                                        <div class="mg-menu-items">
-                                                            <i class="ti-credit-card"></i>
-                                                            <h5>Nos tarifs<span>Nos dernières offres et packs</span>
-                                                            </h5>
-                                                        </div>
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="">
+                                                    <a href="{{ path('carte') }}">
                                                         <div class="mg-menu-items">
                                                             <i class="ti-location-pin"></i>
                                                             <h5>Nous trouver<span>D'où venons-nous ?</span></h5>
-                                                        </div>
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="">
-                                                        <div class="mg-menu-items">
-                                                            <i class="ti-ruler-pencil"></i>
-                                                            <h5>Formation<span>Apprendre avec nous</span></h5>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -365,6 +345,7 @@
     <script src="{{ asset('assets/js/isotope.min.js') }}"></script>
     <script src="{{ asset('assets/js/coreNavigation.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
 
 {% endblock %}
 </body>

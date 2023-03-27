@@ -17,4 +17,15 @@ class PublicController extends AbstractController
     {
         return $this->render('public/about.html.twig');
     }
+
+
+    /**
+     * @Route("/carte", name="carte")
+     */
+
+    public function nousTrouver()
+    {
+        return $this->render('public/carte.html.twig');
+    }
+
 }
