@@ -69,9 +69,17 @@ class PrestataireRepository extends ServiceEntityRepository
             }
             if ($commune != null) {
                 $query->leftJoin('p.profil', 'u')
-                ->leftJoin('u.commune', 'co')
-                ->andWhere('co.commune LIKE :commune')
-                ->setParameter('commune', '%' . $commune . '%');
+                    ->leftJoin('u.commune', 'co')
+                    ->leftJoin('co.localite', 'l')
+                    ->leftJoin('co.codePostal', 'cp')
+                    ->andWhere(
+                        $query->expr()->orX(
+                            'co.commune LIKE :commune',
+                            'l.nom LIKE :commune',
+                            'cp.codePostal = :commune'
+                        )
+                    )
+                    ->setParameter('commune', '%' . $commune . '%');
             }
 
         return $query

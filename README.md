@@ -6,7 +6,7 @@
 
 ### Technologies utilisées :
 
-Le projet a été créé avec les outils suivant, assurez vous d’avoir au minimum ces versions pour pouvoir déployer ce projet dans de bonnes conditions : 
+Le projet a été développé avec les outils suivants. Assurez vous d’avoir au minimum ces versions pour déployer ce projet dans de bonnes conditions : 
 
 >Symfony version 5.4
 >
@@ -20,26 +20,28 @@ Le projet a été créé avec les outils suivant, assurez vous d’avoir au mini
 
 > - Extraire le contenu de l’archive bienetre2023.rar
 >
-> - Installer les dépendances avec la commande ‘composer install’
+> - Installer les dépendances en exécutant la commande ‘composer install’
 >
-> - Configurer le fichier .env avec les informations de connexion à votre base de données
+> - Configurer le fichier .env avec les informations de connexion à votre base de données :
 >
->DATABASE_URL="mysql://root:@127.0.0.1:3306/bienetre?serverVersion=5.1"
+>DATABASE_URL="mysql://user:password@127.0.0.1:3306/bienetre?serverVersion=5.1"
 >
-> - Création de la base de données ‘php bin/console doctrine:database:create’
+>(Remplacez user et password par vos identifiants de connexion à la base de données)
 >
-> - Structure de la base de données ‘php bin/console doctrine:migrations:migrate’
+> - Créer de la base de données ‘php bin/console doctrine:database:create’
 >
-> - Accéder au site en lançant le serveur: ‘symfony server:start’et aller à l’adresse qui s’affiche (normalement https://127.0.0.1:8000/)
+> - Appliquer la structure de la base de données ‘php bin/console doctrine:migrations:migrate’
 >
-> - Charger les communes, localités et codes postaux dans la db en allant à l'adressehttps://127.0.0.1:8000/ajoutadresses
+> - Lancer le serveur avec la commande ‘symfony server:start’et accéder au site à l’adresse affichée (normalement https://127.0.0.1:8000/)
 >
-> - Créer un premier utilisateur et pour lui donner les accès administrateur il faut modifier en base de données dans la table utilisateur le rôle de [“ROLE_USER”] vers [“ROLE_ADMIN”]
+> - Charger les communes, localités et codes postaux dans la base de données en visitant l'adresse https://127.0.0.1:8000/ajoutadresses
+>
+> - Créer un premier utilisateur. Pour lui donner les accès administrateur, modifier en base de données dans la table ‘utilisateur’ le rôle de [“ROLE_USER”] vers [“ROLE_ADMIN”]
 >
 > - Victoire ! Votre site est à présent opérationnel.
 
-L'administrateur pourra gérer l'ajout, la modification et la suppression de catégories de services, la modification et la suppression de prestataires de services.
+L'administrateur pourra gérer l'ajout, la modification et la suppression de catégories de services, ainsi que la modification et la suppression de prestataires de services.
 
 Site réalisé avec JetBrains PHPStorm.
 
-Plus d'informations disponibles dans les documentations utilisateur et développeur.
+Pour plus d'informations, consultez les documentations utilisateur et développeur.
