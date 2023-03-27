@@ -277,9 +277,9 @@
                                     <div class="footer-widget">
                                         <h4 class="widget-title">Essentiels</h4>
                                         <ul class="footer-menu">
-                                            <li><a href="">Réserver</a></li>
-                                            <li><a href="">Promotions</a></li>
-                                            <li><a href="">Événements</a></li>
+                                            <li><a href="{{ path('toutescategories') }}">Catégories</a></li>
+                                            <li><a href="{{ path('app_promotion') }}">Promotions</a></li>
+                                            <li><a href="{{  path('app_stage') }}">Stages</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -288,9 +288,9 @@
                                     <div class="footer-widget">
                                         <h4 class="widget-title">Bien-Être</h4>
                                         <ul class="footer-menu">
-                                            <li><a href="">À propos</a></li>
-                                            <li><a href="">FAQ</a></li>
-                                            <li><a href="">Dans la presse</a></li>
+                                            <li><a href="{{ path('about') }}">À propos</a></li>
+                                            <li><a href="{{ path('carte') }}">Carte</a></li>
+                                            <li><a href="{{ path('recherche') }}">Recherche</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -299,8 +299,8 @@
                                     <div class="footer-widget">
                                         <h4 class="widget-title">Liens utiles</h4>
                                         <ul class="footer-menu">
-                                            <li><a href="">Besoin d'aide</a></li>
-                                            <li><a href="">Contactez-nous</a></li>
+                                            <li><a href="{{ path('tousprestataires') }}">Prestataires</a></li>
+                                            <li><a href="{{ path('contact') }}">Contactez-nous</a></li>
                                             <li><a href="">Vie privée</a></li>
                                         </ul>
                                     </div>
