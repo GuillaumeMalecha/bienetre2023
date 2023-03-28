@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\CodePostal;
+use App\Entity\Commune;
+use App\Entity\Localite;
 use App\Entity\Utilisateur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -71,6 +75,31 @@ class RegistrationFormType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
+                'required' => true,
+            ])
+
+            ->add('localite', EntityType::class, [
+                'class' => Localite::class,
+                'label' => "Localité",
+                'choice_label' => 'localite',
+                'multiple' => false,
+                'mapped' => false,
+                'required' => true,
+            ])
+            ->add('codepostal', EntityType::class, [
+                'class' => CodePostal::class,
+                'label' => "Code postal",
+                'choice_label' => 'codepostal',
+                'multiple' => false,
+                'mapped' => false,
+                'required' => true,
+            ])
+            ->add('commune', EntityType::class, [
+                'class' => Commune::class,
+                'label' => "Commune",
+                'choice_label' => 'commune',
+                'multiple' => false,
+                'mapped' => false,
                 'required' => true,
             ])
             /*->add('Enregistrer', SubmitType::class, [

@@ -72,6 +72,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setCommune($form->get('commune')->getData());
+            $user->setLocalite($form->get('localite')->getData());
+            $user->setCodepostal($form->get('codepostal')->getData());
+
             $entityManager->persist($user);
             $entityManager->flush();
 

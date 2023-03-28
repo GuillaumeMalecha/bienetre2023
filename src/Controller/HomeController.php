@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\CategorieServices;
+use App\Entity\Commune;
+use App\Entity\Localite;
 use App\Entity\Prestataire;
 use App\Repository\PrestataireRepository;
 use Couchbase\SearchResult;
@@ -25,11 +27,16 @@ class HomeController extends AbstractController
 
         $repository = $entityManager->getRepository(Prestataire::class);
         $prestataires = $repository->findAll();
+
         $derniersPrestataires = $repository->findBy([], ['id' => 'DESC'], 4);
+
+        $repository = $entityManager->getRepository(Localite::class);
+        $localites = $repository->findAll();
 
         return $this->render('home/index.html.twig', [
             'categories' => $listeCategories,
             'prestataires' => $prestataires,
+            'localites' => $localites,
             'derniersPrestataires' => $derniersPrestataires,
         ]);
     }
@@ -44,14 +51,17 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(CategorieServices::class);
         $listeCategories = $repository->findAll();
 
+        $repository = $entityManager->getRepository(Localite::class);
+        $localites = $repository->findAll();
+
         $formData = $request->request->all();
 
         $nom = $formData['nom'] ?? null;
         $categorieId = $formData['categorie'] ?? null;
-        $commune = $formData['commune'] ?? null;
+        $localite = $formData['localite'] ?? null;
 
         $repository = $entityManager->getRepository(Prestataire::class);
-        $rechercheNom = $repository->findByRecherche($nom, $categorieId, $commune);
+        $rechercheNom = $repository->findByRecherche($nom, $categorieId, $localite);
 
         $pagination = $paginator->paginate(
             $rechercheNom,
@@ -63,6 +73,7 @@ class HomeController extends AbstractController
             'categories' => $listeCategories,
             'recherchenom' => $rechercheNom,
             'noms' => $nom,
+            'localites' => $localites,
             'pagination' => $pagination,
         ]);
     }

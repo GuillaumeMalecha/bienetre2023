@@ -54,7 +54,7 @@ class PrestataireRepository extends ServiceEntityRepository
     /**
      * @return Prestataire[] Returns an array of Prestataire objects
      */
-    public function findByRecherche($nom = null, $categorie = null, $commune = null): array
+    public function findByRecherche($nom = null, $categorie = null, $localite = null): array
     {
         $query = $this->createQueryBuilder('p');
             if ($nom != null) {
@@ -67,19 +67,10 @@ class PrestataireRepository extends ServiceEntityRepository
                 ->andWhere('c.id = :categorie')
                 ->setParameter('categorie', $categorie);
             }
-            if ($commune != null) {
-                $query->leftJoin('p.profil', 'u')
-                    ->leftJoin('u.commune', 'co')
-                    ->leftJoin('co.localite', 'l')
-                    ->leftJoin('co.codePostal', 'cp')
-                    ->andWhere(
-                        $query->expr()->orX(
-                            'co.commune LIKE :commune',
-                            'l.nom LIKE :commune',
-                            'cp.codePostal = :commune'
-                        )
-                    )
-                    ->setParameter('commune', '%' . $commune . '%');
+            if ($localite != null) {
+                $query->leftJoin('p.localite', 'l')
+                    ->andWhere('l.id = :localite')
+                    ->setParameter('localite', $localite);
             }
 
         return $query

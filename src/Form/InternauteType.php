@@ -2,9 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\CodePostal;
+use App\Entity\Commune;
 use App\Entity\Internaute;
+use App\Entity\Localite;
+use App\Repository\LocaliteRepository;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,12 +45,13 @@ class InternauteType extends AbstractType
 //            ->add('prestataires')
 //            ->add('commentaire')
 //            ->add('abus')
+
+
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

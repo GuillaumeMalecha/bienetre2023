@@ -109,7 +109,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private Prestataire $userProfile;
 
 
-
     public function getId(): ?int
     {
         return $this->id;
