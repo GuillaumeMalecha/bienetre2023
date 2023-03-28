@@ -68,7 +68,8 @@ class PrestataireRepository extends ServiceEntityRepository
                 ->setParameter('categorie', $categorie);
             }
             if ($localite != null) {
-                $query->leftJoin('p.localite', 'l')
+                $query->leftJoin('p.profil', 'pro')
+                    ->leftJoin('pro.localite', 'l')
                     ->andWhere('l.id = :localite')
                     ->setParameter('localite', $localite);
             }
