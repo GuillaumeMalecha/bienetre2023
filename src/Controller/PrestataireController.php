@@ -6,6 +6,7 @@ use App\Entity\Images;
 use App\Entity\Prestataire;
 use App\Entity\Promotion;
 use App\Entity\Stage;
+use App\Entity\Utilisateur;
 use App\Form\PrestataireType;
 use App\Repository\CategorieServicesRepository;
 use App\Repository\PrestataireRepository;
@@ -48,11 +49,12 @@ class PrestataireController extends AbstractController
 
 
     /**
-     * @Route("/ajoutprestataire", name="ajoutprestataire")
+     * @Route("/ajoutprestataire/{userId}", name="ajoutprestataire")
      */
-    public function ajoutprestataire(Request $request, EntityManagerInterface $entityManager): Response
+    public function ajoutprestataire($userId, Request $request, EntityManagerInterface $entityManager): Response
     {
-
+        $repository = $entityManager->getRepository(Utilisateur::class);
+        $user = $repository->find($userId);
         $prestataire = new Prestataire();
         $form = $this->createForm(PrestataireType::class, $prestataire);
         $form->handleRequest($request);
@@ -69,8 +71,9 @@ class PrestataireController extends AbstractController
                 );
                 $images->setImage($fileName);
                 $prestataire->setPhoto($images);
+                $entityManager->persist($images);
             } else {
-                $prestataire->setPhoto(null);
+                $prestataire->setImages(null);
             }
 
             $entityManager->persist($prestataire);

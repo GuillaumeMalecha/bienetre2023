@@ -6,6 +6,7 @@ use App\Entity\CodePostal;
 use App\Entity\Commune;
 use App\Entity\Localite;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ class AdressesController extends AbstractController
 {
     /**
      * @Route("/adresses", name="app_adresses")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
@@ -24,6 +26,7 @@ class AdressesController extends AbstractController
 
     /**
      * @Route("/ajoutadresses", name="ajoutadresses")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function ajoutAdresses(EntityManagerInterface $entityManager){
 

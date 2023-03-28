@@ -307,6 +307,26 @@
                                 </ul>
                             </div>
                         </div>
+                        {%  elseif is_granted('ROLE_USER') and app.user.id == prestataire.id %}
+                        <div class="tr-single-box">
+                            <div class="tr-single-header">
+                                <h4><i class="ti-star"></i>Action utilisateur : {{ prestataire.nom }}</h4>
+                            </div>
+
+                            <div class="tr-single-body">
+                                <ul class="extra-service">
+                                    <li><a href="{{ path('modifierprestataire', {id: prestataire.id}) }}">
+                                            <button type="button" class="btn btn-primary">Modifier le prestataire
+                                            </button>
+                                        </a></li>
+                                    <li><a href="{{ path('app_promotion_ajout', {id: prestataire.id}) }}">
+                                            <button type="button" class="btn btn-info">Ajouter une promotion</button>
+                                        </a></li>
+                                    <li><a href="{{ path('app_stage_ajout', {id: prestataire.id}) }}">
+                                            <button type="button" class="btn btn-info">Ajouter un stage</button>
+                                        </a></li>
+                                </ul>
+                            </div>
                     {% endif %}
                 </div>
     </section>
