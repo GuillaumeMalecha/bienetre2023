@@ -76,6 +76,7 @@ class PrestataireController extends AbstractController
                 $prestataire->setImages(null);
             }
 
+            $prestataire->setProfil($user);
             $entityManager->persist($prestataire);
             $entityManager->flush();
 
