@@ -15,11 +15,11 @@ class InternauteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('newsletter', CheckboxType::class, [
-                'label' => "Je souhaite recevoir la Newsletter",
-                'mapped' => false,
-                'required' => false,
-            ])
+//            ->add('newsletter', CheckboxType::class, [
+//                'label' => "Je souhaite recevoir la Newsletter",
+//                'mapped' => false,
+//                'required' => false,
+//            ])
             ->add('nom', TextType::class, [
                 'label' => "Nom",
                 'required' => true,
@@ -33,11 +33,11 @@ class InternauteType extends AbstractType
 //                'mapped' => false,
 //                'required' => true,
 //            ])
-            //->add('images')
-            //->add('blocs')
-            //->add('prestataires')
-            //->add('commentaire')
-            //->add('abus')
+//            ->add('images')
+//            ->add('blocs')
+//            ->add('prestataires')
+//            ->add('commentaire')
+//            ->add('abus')
             ->add('Enregistrer', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary'

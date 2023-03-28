@@ -40,6 +40,11 @@ class Internaute
     private $images;
 
     /**
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="internaute", cascade={"persist", "remove"})
+     */
+    private $profil;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Bloc::class, mappedBy="choix")
      */
     private $blocs;
@@ -124,6 +129,18 @@ class Internaute
         }
 
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getProfil(): ?Utilisateur
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(?Utilisateur $profil): self
+    {
+        $this->profil = $profil;
 
         return $this;
     }

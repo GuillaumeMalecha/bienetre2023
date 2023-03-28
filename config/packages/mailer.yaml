@@ -5,4 +5,5 @@ framework:
 when@dev:
     framework:
         mailer:
-            dsn: 'null://null'
+            envelope:
+                recipients: ['bonjour@bienetre.com']

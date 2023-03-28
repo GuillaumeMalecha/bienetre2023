@@ -21,14 +21,16 @@ class InternauteController extends AbstractController
         $repository = $entityManager->getRepository(Utilisateur::class);
         $user = $repository->find($userId);
         $internaute = new Internaute();
+        $internaute->setNewsletter(false);
         $form = $this->createForm(InternauteType::class, $internaute);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setProfil($internaute);
-            $localite = $form->get('localite')->getData();
-            $user->setLocalite($localite);
+
+            //$localite = $form->get('localite')->getData();
+            //$user->setLocalite($localite);
+            $internaute->setProfil($user);
             $entityManager->persist($internaute);
             $entityManager->flush();
 

@@ -93,9 +93,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $commune;
 
     /**
-     * @ORM\OneToOne(targetEntity=Internaute::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Internaute::class, mappedBy="profil", cascade={"persist", "remove"})
      */
-    private $profil;
+    private $internaute;
 
     /**
      * @ORM\OneToOne(targetEntity=Prestataire::class, mappedBy="profil", cascade={"persist", "remove"})
@@ -322,14 +322,22 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
 
 
-    public function getProfil(): ?Internaute
+    public function getInternaute(): ?Internaute
     {
-        return $this->profil;
+        return $this->internaute;
     }
 
-    public function setProfil(?Internaute $profil): self
+    public function setInternaute(?Internaute $internaute): self
     {
-        $this->profil = $profil;
+        if ($internaute === null && $this->internaute !== null) {
+            $this->internaute->setProfil(null);
+        }
+
+        if ($internaute !== null && $internaute->getProfil() !== $this) {
+            $internaute->setProfil($this);
+        }
+
+        $this->internaute = $internaute;
 
         return $this;
     }
