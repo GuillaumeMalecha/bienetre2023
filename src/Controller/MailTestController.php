@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ class MailTestController extends AbstractController
 
     /**
      * @Route("/mail/test", name="app_mail_test")
+     * @throws TransportExceptionInterface
      */
 
     public function sendTestEmail(MailerInterface $mailer): Response
