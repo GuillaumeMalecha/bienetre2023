@@ -4,35 +4,32 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
 class MailTestController extends AbstractController
 {
 
-    public function testMailIsSentAndContentIsOk()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/mail/send');
-        $this->assertResponseIsSuccessful();
-
-        $this->assertEmailCount(1); // use assertQueuedEmailCount() when using Messenger
-
-        $email = $this->getMailerMessage();
-
-        $this->assertEmailHtmlBodyContains($email, 'Welcome');
-        $this->assertEmailTextBodyContains($email, 'Welcome');
-    }
-
     /**
-     * @Route("/mail/controller/test", name="app_mail_controller_test")
+     * @Route("/mail/test", name="app_mail_test")
      */
-    public function index(): Response
+
+    public function sendTestEmail(MailerInterface $mailer): Response
     {
-        return $this->render('mail_controller_test/index.html.twig', [
-            'controller_name' => 'MailTestController',
-        ]);
+        $email = (new Email())
+            ->from('bonjour@bienetre.com')
+            ->to('test@bienetre.com')
+            ->subject('Test Email')
+            ->text('Ceci est un test d\'envoi d\'email');
+
+        $mailer->send($email);
+
+        return $this->redirectToRoute('home');
     }
+
+
 
 
 }
